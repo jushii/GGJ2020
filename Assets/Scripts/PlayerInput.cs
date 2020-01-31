@@ -35,10 +35,10 @@ public class PlayerInput : MonoBehaviour
     {
         switch (button)
         {
-            case Button.A: return Input.GetButton(_aButton);
-            case Button.B: return Input.GetButton(_bButton);
-            case Button.X: return Input.GetButton(_xButton);
-            case Button.Y: return Input.GetButton(_yButton);
+            case Button.A: return Input.GetButtonDown(_aButton);
+            case Button.B: return Input.GetButtonDown(_bButton);
+            case Button.X: return Input.GetButtonDown(_xButton);
+            case Button.Y: return Input.GetButtonDown(_yButton);
         }
 
         return false;
@@ -65,7 +65,7 @@ public class PlayerInput : MonoBehaviour
             if (vertical < 0.3f && vertical > -0.3f) vertical = 0;
             Horizontal = horizontal;
             Vertical = vertical;
-            Debug.Log($"Horizontal: {Horizontal} Vertical: {Vertical}");
+            // Debug.Log($"Horizontal: {Horizontal} Vertical: {Vertical}");
         }
     }
 }

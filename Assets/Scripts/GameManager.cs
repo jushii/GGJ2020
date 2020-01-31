@@ -1,12 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DefaultNamespace
 {
     public class GameManager : MonoBehaviour
     {
+        public static GameManager Instance;
+        
         [SerializeField] private GridVisualizer gridVisualizerPrefab;
         
         public Level level;
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+        }
 
         private void Start()
         {
