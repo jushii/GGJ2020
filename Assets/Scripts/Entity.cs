@@ -2,6 +2,7 @@
 using DefaultNamespace.JPT;
 using Unity.Mathematics;
 using UnityEngine;
+using DG.Tweening;
 
 namespace DefaultNamespace
 {
@@ -50,6 +51,16 @@ namespace DefaultNamespace
             _myCollider.enabled = true;
             DisableHighlight();
             _isBeingCarried = false;
+        }
+
+        public void OnThrow(int2 throwDestination)
+        {
+            Vector3 throwDest = throwDestination.GetWorldPosition();
+            throwDest.z = 0.0f;
+            transform.DOMove(throwDest, 0.25f).OnComplete(() =>
+            {
+                OnDrop(throwDestination);
+            });
         }
 
         private void Update()

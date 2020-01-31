@@ -15,6 +15,7 @@ namespace DefaultNamespace
         private float _moveSpeed = 5.0f;
         private PlayerInput _playerInput;
         private Vector2 _movement;
+        private Vector2 _previousMovement;
 
         private Collider2D[] _interactionResults = new Collider2D[10];
         private float _interactionDistance = 0.5f;
@@ -24,11 +25,12 @@ namespace DefaultNamespace
         private GameObject _dropHighlight;
         private int2 _myGridPosition;
         private int2 _dropPosition;
+        private int2 _throwPosition;
         
         private void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
-            _dropHighlight = GameObject.Instantiate(Resources.Load("DropHighlight") as GameObject);
+            _dropHighlight = Instantiate(Resources.Load("DropHighlight") as GameObject);
             _dropHighlight.SetActive(false);
         }
 
@@ -58,6 +60,10 @@ namespace DefaultNamespace
             _movement.x = _playerInput.Horizontal;
             _movement.y = _playerInput.Vertical;
             _movement = _movement.normalized;
+            if (_movement.x != 0.0f || _movement.y != 0.0f)
+            {
+                _previousMovement = _movement;
+            }
             rb.MovePosition(rb.position + _movement * _moveSpeed * Time.fixedDeltaTime);
         }
 
@@ -69,12 +75,13 @@ namespace DefaultNamespace
             v.Normalize();
             if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
             {
-                // derp
+                Vector3 pos = _myGridPosition.GetWorldPosition() + (Vector3) _previousMovement * 1.0f;
+                _dropPosition = pos.GetGridPosition();
             }
             else
             {
-                Vector3 pos = _myGridPosition.GetWorldPosition() + (Vector3) v;
-                _dropPosition = pos.GetGridPosition();
+                Vector3 pos = _myGridPosition.GetWorldPosition() + (Vector3) v * 5.0f;
+                _throwPosition = pos.GetGridPosition();
             }
         }
         
@@ -87,7 +94,20 @@ namespace DefaultNamespace
                     _dropHighlight.SetActive(true);
                 }
 
-                _dropHighlight.transform.position = _dropPosition.GetWorldPosition();
+                // _dropHighlight.transform.position = _dropPosition.GetWorldPosition();
+
+                Vector2 v;
+                v.x = _playerInput.Horizontal;
+                v.y = _playerInput.Vertical;
+                v.Normalize();
+                if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
+                {
+                    _dropHighlight.transform.position = _dropPosition.GetWorldPosition();
+                }
+                else
+                {
+                    _dropHighlight.transform.position = _throwPosition.GetWorldPosition();
+                }
             }
             else
             {
@@ -125,7 +145,9 @@ namespace DefaultNamespace
                 }
                 else
                 {
-                    Debug.Log("IS MOVING. THROW!");
+                    _currentInteractableCandidate.OnThrow(_throwPosition);
+                    _currentInteractableCandidate = null;
+                    _isCarryingSomething = false;
                 }
             }
         }
