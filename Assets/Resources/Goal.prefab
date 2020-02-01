@@ -122,6 +122,7 @@ MonoBehaviour:
   normalMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   outlineMaterial: {fileID: 2100000, guid: f7cfb8b82b7044802b656cb356f2a075, type: 2}
   outline: {fileID: 4177534929353462739}
+  animator: {fileID: 7861381309801454434}
   isPickup: 1
   isBreakable: 0
   isGoal: 1
@@ -129,7 +130,10 @@ MonoBehaviour:
     x: 0
     y: 0
   isBeingCarried: 0
+  pickupTriggerName: carry
+  dropTriggerName: scream
   isCarryingGoal: 0
+  breakable: {fileID: 0}
 --- !u!61 &4177534928280662465
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -32,11 +32,15 @@ namespace DefaultNamespace
         public StateMachine stateMachine;
         public bool npcHasTheGoal;
 
-        private SpriteRenderer _spriteRenderer;
+        public SpriteRenderer _spriteRenderer;
         public Animator animator;
         public PlayerAnimation _playerAnimation;
         private Collider2D[] _hitResults = new Collider2D[10];
-        
+
+        public bool isFlip = false;
+        public Transform carryPosition;
+
+
         private void Start()
         {
             animator = GetComponentInChildren<Animator>();
@@ -165,17 +169,20 @@ namespace DefaultNamespace
             
             _movement.x = playerInput.Horizontal;
             _movement.y = playerInput.Vertical;
-
             _movement = _movement.normalized;
 
             int sign = Math.Sign(_movement.x);
             if (sign == 1)
             {
                 _spriteRenderer.flipX = true;
+                carryPosition.transform.localScale = new Vector3(-1, 1, 1);
+                isFlip = true;
             }
             else if (sign == -1)
             {
                 _spriteRenderer.flipX = false;
+                carryPosition.transform.localScale = new Vector3(1, 1, 1);
+                isFlip = false;
             }
 
             if (_movement.x != 0.0f || _movement.y != 0.0f)
