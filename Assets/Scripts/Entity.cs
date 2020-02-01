@@ -38,11 +38,11 @@ namespace DefaultNamespace
         private bool _updateUnwalkable;
 
         public bool isCarryingGoal;
+        public Breakable breakable;
         
         private void Start()
         {
             _player = GetComponentInParent<Player>();
-            
             _myCollider = GetComponent<Collider2D>();
             int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
             Vector3 gridWorldPosition = gridPosition.GetWorldPosition();
@@ -93,6 +93,10 @@ namespace DefaultNamespace
         {
             _myCollider.enabled = false;
             _carrierCollider = carrier;
+            if (breakable != null)
+            {
+                breakable.conditionUi.Hide();
+            }
             DisableHighlight();
 
             // GameManager.Instance.level.MakeWalkable(myPosition);
@@ -133,6 +137,11 @@ namespace DefaultNamespace
             _myCollider.enabled = true;
             DisableHighlight();
 
+            if (breakable != null)
+            {
+                breakable.conditionUi.Show();
+            }
+            
             myPosition = dropPosition;
             // GameManager.Instance.level.MakeUnwalkable(dropPosition);
 

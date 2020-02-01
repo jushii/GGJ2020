@@ -40,21 +40,28 @@ namespace DefaultNamespace
             
             if (breakableTarget == null) return;
             
-            if (Time.frameCount % _interval == 0)
-            {
-                UpdatePathToGoal();
-            }
+            // if (Time.frameCount % _interval == 0)
+            // {
+            //     UpdatePathToGoal();
+            // }
 
             if (!_canMove) return;
 
-            if (_nextPathPositionIndex == -1 || _nextPathPositionIndex >= _pathfinderResult.Path.Count) return;
+            // if (_nextPathPositionIndex == _pathfinderResult.Path.Count - 1)
+            // {
+            //     Debug.Log("up");
+            //     _destinationReached = true;
+            //     _canMove = false;
+            //     StateMachine.ChangeState(typeof(BreakStuffState));
+            //     return;
+            // }
             
             // Vector3 myWorldPos = _player.myGridPosition.GetWorldPosition() + (Vector3.up * (Mathf.Abs(_player.myCollider.offset.y)));
             // Vector3 nextWaypointPos = _pathfinderResult.Path[_nextPathPositionIndex].GridPosition.GetWorldPosition() + (Vector3.up * (Mathf.Abs(_player.myCollider.offset.y)));
 
             Vector3 myWorldPos = _player.myGridPosition.GetWorldPosition();
             Vector3 nextWaypointPos = _pathfinderResult.Path[_nextPathPositionIndex].GridPosition.GetWorldPosition();
-
+            
             float dst = Vector3.Distance(myWorldPos, nextWaypointPos);
             
             // If we reached, set next way point.
@@ -62,7 +69,7 @@ namespace DefaultNamespace
             {
                 _nextPathPositionIndex++;
                 
-                if (_nextPathPositionIndex <= _pathfinderResult.Path.Count - 1)
+                if (_nextPathPositionIndex < _pathfinderResult.Path.Count - 1)
                 {
                     _player.playerInput.Horizontal = 0.0f;
                     _player.playerInput.Vertical = 0.0f;
@@ -71,7 +78,7 @@ namespace DefaultNamespace
                 {
                     _destinationReached = true;
                     _canMove = false;
-                    Debug.Log("destination reached");
+                    StateMachine.ChangeState(typeof(BreakStuffState));
                 }
                 
                 return;
@@ -87,7 +94,6 @@ namespace DefaultNamespace
         {
             Level level = GameManager.Instance.level;
             var pathfinderResult = Pathfinder.FindPath(level.grid, _player.myGridPosition, GameManager.Instance.goalObject.myPosition);
-            Debug.Log("path length to goal: " + pathfinderResult.Path.Count);
 
             if (pathfinderResult.Path.Count > 0)
             {
@@ -101,19 +107,21 @@ namespace DefaultNamespace
 
         private void FindPathToNearestBreakable()
         {
-            var breakable = GameManager.Instance.GetBestNearestBreakable(_player.myGridPosition);
-            if (breakable == null)
-            {
-                Debug.LogError("this should never happen! :D");
-            }
-
-            breakableTarget = breakable;
+            // var breakable = GameManager.Instance.GetNewBreakableTarget(_player.myGridPosition);
+            // if (breakable == null)
+            // {
+            //     Debug.LogError("this should never happen! :D");
+            // }
+            //
+            // breakableTarget = breakable;
+            //
+            UpdatePathToGoal();
         }
         
         private void UpdatePathToGoal()
         {
             Level level = GameManager.Instance.level;
-            breakableTarget = GameManager.Instance.GetBestNearestBreakable(_player.myGridPosition);
+            breakableTarget = GameManager.Instance.GetNewBreakableTarget(_player.myGridPosition);
             var pathfinderResult = Pathfinder.FindPath(level.grid, _player.myGridPosition, breakableTarget.GridPosition);
       
             _nextPathPositionIndex = 1;

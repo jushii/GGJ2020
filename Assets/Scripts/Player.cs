@@ -33,12 +33,13 @@ namespace DefaultNamespace
         public bool npcHasTheGoal;
 
         private SpriteRenderer _spriteRenderer;
-        private Animator _animator;
+        public Animator animator;
         public PlayerAnimation _playerAnimation;
+        private Collider2D[] _hitResults = new Collider2D[10];
         
         private void Start()
         {
-            _animator = GetComponentInChildren<Animator>();
+            animator = GetComponentInChildren<Animator>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             myCollider = GetComponent<Collider2D>();
             _entity = GetComponent<Entity>();
@@ -56,6 +57,7 @@ namespace DefaultNamespace
                 stateMachine.AddState(new GettingCarriedState(stateMachine, this));
                 stateMachine.AddState(new DroppedState(stateMachine, this));
                 stateMachine.AddState(new StealState(stateMachine, this));
+                stateMachine.AddState(new BreakStuffState(stateMachine, this));
                 GameManager.Instance.AddStateMachine(stateMachine);
                 stateMachine.ChangeState(typeof(SpawnState));
                 
@@ -134,21 +136,21 @@ namespace DefaultNamespace
                 case PlayerAnimation.Fix:
                 {
                     _playerAnimation = playerAnimation;
-                    _animator.SetTrigger("fix");
+                    animator.SetTrigger("fix");
                     return;
                 }
                 case PlayerAnimation.Grab:
                 {
                     if (_playerAnimation == playerAnimation) return;
                     _playerAnimation = playerAnimation;
-                    _animator.SetTrigger("grab");
+                    animator.SetTrigger("grab");
                     return;
                 }
                 case PlayerAnimation.Throw:
                 {
                     if (_playerAnimation == playerAnimation) return;
                     _playerAnimation = playerAnimation;
-                    _animator.SetTrigger("throw");
+                    animator.SetTrigger("throw");
                     return;
                 }
             }
@@ -238,6 +240,23 @@ namespace DefaultNamespace
         private void Repair()
         {
             SetPlayerAnimation(PlayerAnimation.Fix);
+            
+            bool foundHit = false;
+
+            int colliderHitCount = Physics2D.OverlapCircleNonAlloc(myCollider.bounds.center, 1.2f, _hitResults);
+            float neareastSqrDst = float.MaxValue;
+            Entity interactionCandidate = null;
+        
+            for (int i = 0; i < colliderHitCount; i++)
+            {
+                _hitResults[i].TryGetComponent(out Breakable breakable);
+                if (breakable != null && breakable.Health > 0.0f)
+                {
+                    foundHit = true;
+                    breakable.IncreaseHealth(0.02f);
+                    break;
+                }
+            }
         }
         
         private void TryPickup()
@@ -338,10 +357,11 @@ namespace DefaultNamespace
             int colliderHitCount = Physics2D.OverlapCircleNonAlloc(myCollider.bounds.center, _interactionDistance, _interactionResults);
             float neareastSqrDst = float.MaxValue;
             Entity interactionCandidate = null;
-            
+
             for (int i = 0; i < colliderHitCount; i++)
             {
                 _interactionResults[i].TryGetComponent(out Entity entity);
+                
                 if (entity != null && entity.isPickup)
                 {
                     Vector3 offset = entity.transform.position - transform.position;

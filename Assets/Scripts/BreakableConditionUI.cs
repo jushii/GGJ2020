@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BreakableConditionUI : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image fillImage;
     private Breakable _breakable;
     private Camera _camera;
@@ -25,9 +26,20 @@ public class BreakableConditionUI : MonoBehaviour
         _isInitialized = true;
     }
 
+    public void Show()
+    {
+        canvasGroup.alpha = 1.0f;
+    }
+
+    public void Hide()
+    {
+        canvasGroup.alpha = 0.0f;
+    }
+    
     public void SetCondition(float condition)
     {
         fillImage.color = Color.Lerp(Color.red, Color.green, condition / 1.0f);
+        fillImage.fillAmount = Mathf.Clamp(condition / 1.0f, 0.0f, 1.0f);
     }
     
     private void LateUpdate()

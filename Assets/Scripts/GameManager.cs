@@ -46,7 +46,7 @@ namespace DefaultNamespace
             }
 
             breakables = GameObject.FindObjectsOfType<Breakable>().ToList();
-            Debug.Log("total breakables: " + breakables.Count);
+            // Debug.Log("total breakables: " + breakables.Count);
         }
 
         private void Update()
@@ -137,22 +137,25 @@ namespace DefaultNamespace
         
         public List<PathfinderResult> pathfinderResults = new List<PathfinderResult>();
 
-        public Breakable GetBestNearestBreakable(int2 position)
+        public Breakable GetNewBreakableTarget(int2 position)
         {
+            breakables.Shuffle();
+
             Breakable best = null;
             int bestPathLength = int.MaxValue;
             
             for (int i = 0; i < breakables.Count; i++)
             {
                 Breakable breakable = breakables[i];
-                if (breakable.Health <= 0.0f) continue;
+                if (!breakable.CanTarget()) continue;
                 
                 var pathfinderResult = Pathfinder.FindPath(level.grid, position, breakable.GridPosition);
                 
-                if (pathfinderResult.Path.Count < bestPathLength)
+                if (pathfinderResult.Path.Count < bestPathLength && pathfinderResult.Path.Count != 0)
                 {
                     best = breakables[i];
                     bestPathLength = pathfinderResult.Path.Count;
+                    return best;
                 }
             }
 
