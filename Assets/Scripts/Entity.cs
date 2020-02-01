@@ -11,7 +11,8 @@ namespace DefaultNamespace
         [SerializeField] private Material normalMaterial;
         [SerializeField] private Material outlineMaterial;
         [SerializeField] private SpriteOutline outline;
-    
+        [SerializeField] Animator animator;
+
         [Header("Can be picked up")]
         public bool isPickup;
 
@@ -29,8 +30,15 @@ namespace DefaultNamespace
         private int2 _myThrowDestination;
         private Collider2D _carrierCollider;
         public bool isBeingCarried;
+
+        //[SerializeField] Transform carryPosition;
         private float _carryOffsetY = 1.0f;
         private Tweener _throwTween;
+
+        [Header("Pick up animation")]
+        [SerializeField] string pickupTriggerName = "";
+        [SerializeField] string dropTriggerName = "";
+
 
         private Player _player;
 
@@ -89,6 +97,9 @@ namespace DefaultNamespace
             }
         }
 
+
+        int cacheLayerOrder = 0;
+
         public void OnPickup(Collider2D carrier)
         {
             _myCollider.enabled = false;
@@ -104,6 +115,20 @@ namespace DefaultNamespace
             {
                 _updateWalkable = true;
             }
+
+            if (animator != null)
+            {
+                animator.SetTrigger(pickupTriggerName);
+            }
+
+            Player player = carrier.GetComponent<Player>();
+            this.transform.SetParent(player.carryPosition);
+            this.transform.localPosition = new Vector3(0, 0, 0);
+            if (player.isFlip) this.transform.localScale = new Vector3(-1, 1, 1);
+            cacheLayerOrder = spriteRenderer.sortingOrder;
+            spriteRenderer.sortingOrder = player._spriteRenderer.sortingOrder + 1;
+
+            //if (carrierEntity!=null) carrier.
 
             isBeingCarried = true;
 
@@ -137,6 +162,8 @@ namespace DefaultNamespace
             _myCollider.enabled = true;
             DisableHighlight();
 
+            spriteRenderer.sortingOrder = cacheLayerOrder;
+
             if (breakable != null)
             {
                 breakable.conditionUi.Show();
@@ -149,9 +176,14 @@ namespace DefaultNamespace
             // {
             //     _updateUnwalkable = true;
             // }
-            
+
+            if (animator != null)
+            {
+                animator.SetTrigger(dropTriggerName);
+            }
+
             isBeingCarried = false;
-            
+
             if (_player != null && _player.isNpc)
             {
                 _player.stateMachine.ChangeState(typeof(DroppedState));
@@ -161,6 +193,7 @@ namespace DefaultNamespace
         public void OnThrow(int2 throwDestination)
         {
             _myThrowDestination = throwDestination;
+            this.transform.SetParent(null);
 
             // If we are not throwing an NPC, make destination unwalkable.
             if (_player == null)
@@ -198,12 +231,12 @@ namespace DefaultNamespace
             int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
             myPosition = gridPosition;
             
-            if (isBeingCarried)
-            {
-                Vector3 carryPosition = _carrierCollider.bounds.center + Vector3.up * _carryOffsetY;
-                carryPosition.z = 0.0f;
-                transform.position = carryPosition;
-            }
+            //if (isBeingCarried)
+            //{
+            //    Vector3 carryPosition = _carrierCollider.bounds.center + Vector3.up * _carryOffsetY;
+            //    carryPosition.z = 0.0f;
+            //    transform.position = carryPosition;
+            //}
         }
     }
 }
