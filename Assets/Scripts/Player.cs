@@ -42,7 +42,7 @@ namespace DefaultNamespace
             
             if (isNpc)
             {
-                _moveSpeed = 1.0f;
+                _moveSpeed = 1.5f;
                 stateMachine = new StateMachine();
                 stateMachine.AddState(new SpawnState(stateMachine, this));
                 stateMachine.AddState(new MoveToGoalState(stateMachine, this));
@@ -70,6 +70,13 @@ namespace DefaultNamespace
                         TryPickup();
                     }
                     else
+                    {
+                        TryThrow();
+                    }
+                }
+                else if (playerInput.IsButtonDown(PlayerInput.Button.B))
+                {
+                    if (_isCarryingSomething)
                     {
                         TryDrop();
                     }
@@ -158,30 +165,64 @@ namespace DefaultNamespace
 
         private void TryDrop()
         {
+            if (_isCarryingSomething && playerInput.IsButtonDown(PlayerInput.Button.B))
+            {
+                Vector2 v;
+                v.x = playerInput.Horizontal;
+                v.y = playerInput.Vertical;
+                v = v.normalized;
+                // if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
+                // {
+                    Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
+                    if (tile.IsBlocked) return;
+
+                    _currentInteractableCandidate.OnDrop(_dropPosition);
+                    OnDrop();
+                // }
+                // else
+                // {
+                    // Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
+                    // if (tile.IsBlocked) return;
+                    //
+                    // _currentInteractableCandidate.OnThrow(_dropPosition, _throwPosition);
+                    // _currentInteractableCandidate = null;
+                    // _isCarryingSomething = false;
+                // }
+            }
+        }
+
+        public void OnDrop()
+        {
+            _currentInteractableCandidate = null;
+            _isCarryingSomething = false;
+        }
+        
+        private void TryThrow()
+        {
             if (_isCarryingSomething && playerInput.IsButtonDown(PlayerInput.Button.A))
             {
                 Vector2 v;
                 v.x = playerInput.Horizontal;
                 v.y = playerInput.Vertical;
                 v = v.normalized;
-                if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
-                {
-                    Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
-                    if (tile.IsBlocked) return;
-
-                    _currentInteractableCandidate.OnDrop(_dropPosition);
-                    _currentInteractableCandidate = null;
-                    _isCarryingSomething = false;
-                }
-                else
-                {
+                // if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
+                // {
+                //     // Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
+                //     // if (tile.IsBlocked) return;
+                //     //
+                //     // _currentInteractableCandidate.OnDrop(_dropPosition);
+                //     // _currentInteractableCandidate = null;
+                //     // _isCarryingSomething = false;
+                // }
+                // else
+                // {
                     Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
                     if (tile.IsBlocked) return;
                     
                     _currentInteractableCandidate.OnThrow(_dropPosition, _throwPosition);
                     _currentInteractableCandidate = null;
                     _isCarryingSomething = false;
-                }
+                // }
             }
         }
         

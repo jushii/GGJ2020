@@ -106,6 +106,12 @@ namespace DefaultNamespace
             }
         }
 
+        public void OnSteal(Collider2D stealer)
+        {
+            _carrierCollider.transform.GetComponent<Player>().OnDrop();
+            OnPickup(stealer);
+        }
+        
         public void OnDrop(int2 dropPosition)
         {
             transform.position = dropPosition.GetWorldPosition() + Vector3.up * (Mathf.Abs(_myCollider.offset.y));
@@ -136,7 +142,8 @@ namespace DefaultNamespace
             Vector3 throwWorldDest = throwDestination.GetWorldPosition() + Vector3.up * (Mathf.Abs(_myCollider.offset.y));
             throwWorldDest.z = 0.0f;
             
-            _throwTween = transform.DOMove(throwWorldDest, 0.25f)
+            _throwTween = transform.DOMove(throwWorldDest, 0.35f)
+                .SetUpdate(UpdateType.Late)
                 .OnUpdate(CheckIfCollidedWhileFlying)
                 .OnComplete(() =>
                 {
@@ -150,7 +157,7 @@ namespace DefaultNamespace
             Tile tile = GameManager.Instance.level.GetTile(currentFlyingPos);
             if (tile.IsBlocked)
             {
-                _throwTween.ChangeEndValue(_myThrowDestination.GetWorldPosition() + Vector3.up * (Mathf.Abs(_myCollider.offset.y)));
+                _throwTween.ChangeEndValue(_myThrowDestination.GetWorldPosition() + (Vector3.up * (Mathf.Abs(_myCollider.offset.y))));
                 _throwTween.Complete();
                 OnDrop(_myThrowDestination);
             }

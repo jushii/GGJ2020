@@ -88,5 +88,10 @@ namespace DefaultNamespace
                 _canMove = false;
             }
         }
+
+        private void GrabTheGoal()
+        {
+            
+        }
     }
 }

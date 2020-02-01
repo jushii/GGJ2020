@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class DroppedState : State
+    public class StealState : State
     {
         private Player _player;
         
-        public DroppedState(StateMachine stateMachine, Player player)
+        public StealState(StateMachine stateMachine, Player player)
             : base(stateMachine)
         {
             _player = player;
@@ -15,22 +15,21 @@ namespace DefaultNamespace
         
         public override void EnterState(object args)
         {
-            _player.playerInput.Horizontal = 0.0f;
-            _player.playerInput.Vertical = 0.0f;
-            FindPathToGoal();
+            // Debug.Log("Spawned!");
+            // FindPathToGoal();
         }
 
         public override void ExitState()
         {
             
         }
-        
+
         private void FindPathToGoal()
         {
             Level level = GameManager.Instance.level;
             var pathfinderResult = Pathfinder.FindPath(level.grid, _player.myGridPosition, GameManager.Instance.goalObject.myPosition);
-            Debug.Log("path length to goal: " + pathfinderResult.Path.Count);
-            StateMachine.ChangeState(typeof(SpawnState), pathfinderResult);
+            // Debug.Log("path length to goal: " + pathfinderResult.Path.Count);
+            StateMachine.ChangeState(typeof(MoveToGoalState), pathfinderResult);
         }
     }
 }

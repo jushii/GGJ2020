@@ -15,7 +15,7 @@ namespace DefaultNamespace
         
         public override void EnterState(object args)
         {
-            Debug.Log("Spawned!");
+            // Debug.Log("Spawned!");
             FindPathToGoal();
         }
 
@@ -28,7 +28,7 @@ namespace DefaultNamespace
         {
             Level level = GameManager.Instance.level;
             var pathfinderResult = Pathfinder.FindPath(level.grid, _player.myGridPosition, GameManager.Instance.goalObject.myPosition);
-            Debug.Log("path length to goal: " + pathfinderResult.Path.Count);
+            // Debug.Log("path length to goal: " + pathfinderResult.Path.Count);
             StateMachine.ChangeState(typeof(MoveToGoalState), pathfinderResult);
         }
     }
