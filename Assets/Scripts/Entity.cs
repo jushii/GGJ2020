@@ -29,7 +29,7 @@ namespace DefaultNamespace
         private int2 _myThrowDestination;
         private Collider2D _carrierCollider;
         public bool isBeingCarried;
-        private float _carryOffsetY = 1.25f;
+        private float _carryOffsetY = 1.0f;
         private Tweener _throwTween;
 
         private Player _player;
