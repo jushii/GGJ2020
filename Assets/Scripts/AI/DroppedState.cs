@@ -3,19 +3,20 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class SpawnState : State
+    public class DroppedState : State
     {
         private Player _player;
         
-        public SpawnState(StateMachine stateMachine, Player player)
-        : base(stateMachine)
+        public DroppedState(StateMachine stateMachine, Player player)
+            : base(stateMachine)
         {
             _player = player;
         }
         
         public override void EnterState(object args)
         {
-            Debug.Log("Spawned!");
+            _player.playerInput.Horizontal = 0.0f;
+            _player.playerInput.Vertical = 0.0f;
             FindPathToGoal();
         }
 
@@ -23,7 +24,7 @@ namespace DefaultNamespace
         {
             
         }
-
+        
         private void FindPathToGoal()
         {
             Level level = GameManager.Instance.level;

@@ -1,5 +1,4 @@
 ﻿using System;
-using DefaultNamespace.JPT;
 using Unity.Mathematics;
 using UnityEngine;
 using DG.Tweening;
@@ -34,6 +33,9 @@ namespace DefaultNamespace
         private Tweener _throwTween;
 
         private Player _player;
+
+        private bool _updateWalkable;
+        private bool _updateUnwalkable;
         
         private void Start()
         {
@@ -48,7 +50,11 @@ namespace DefaultNamespace
             Vector3 gridWorldPosition = gridPosition.GetWorldPosition();
             transform.position = gridWorldPosition;
             myPosition = gridPosition;
-            GameManager.Instance.level.MakeUnwalkable(myPosition);
+
+            if (_player != null && _player.isNpc)
+            {
+                GameManager.Instance.level.MakeUnwalkable(myPosition);
+            }
             
             outline.color = Color.green;
             
@@ -65,15 +71,39 @@ namespace DefaultNamespace
             spriteRenderer.material = normalMaterial;
         }
 
+        private void LateUpdate()
+        {
+            if (_updateWalkable)
+            {
+                GameManager.Instance.level.MakeWalkable(myPosition);
+                _updateWalkable = false;
+            }
+
+            if (_updateUnwalkable)
+            {
+                GameManager.Instance.level.MakeUnwalkable(myPosition);
+                _updateUnwalkable = false;
+            }
+        }
+
         public void OnPickup(Collider2D carrier)
         {
             _myCollider.enabled = false;
             _carrierCollider = carrier;
             DisableHighlight();
 
-            GameManager.Instance.level.MakeWalkable(myPosition);
+            // GameManager.Instance.level.MakeWalkable(myPosition);
+            if (_player == null)
+            {
+                _updateWalkable = true;
+            }
 
             isBeingCarried = true;
+
+            if (_player != null && _player.isNpc)
+            {
+                _player.stateMachine.ChangeState(typeof(GettingCarriedState));
+            }
         }
 
         public void OnDrop(int2 dropPosition)
@@ -84,9 +114,19 @@ namespace DefaultNamespace
             DisableHighlight();
 
             myPosition = dropPosition;
-            GameManager.Instance.level.MakeUnwalkable(dropPosition);
+            // GameManager.Instance.level.MakeUnwalkable(dropPosition);
 
+            if (_player == null)
+            {
+                _updateUnwalkable = true;
+            }
+            
             isBeingCarried = false;
+            
+            if (_player != null && _player.isNpc)
+            {
+                _player.stateMachine.ChangeState(typeof(DroppedState));
+            }
         }
 
         public void OnThrow(int2 dropDestination, int2 throwDestination)
@@ -122,6 +162,9 @@ namespace DefaultNamespace
         
         private void Update()
         {
+            int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
+            myPosition = gridPosition;
+            
             if (isBeingCarried)
             {
                 Vector3 carryPosition = _carrierCollider.bounds.center + Vector3.up * _carryOffsetY;

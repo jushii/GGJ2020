@@ -1,5 +1,4 @@
 ﻿using System;
-using DefaultNamespace.JPT;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -11,10 +10,10 @@ namespace DefaultNamespace
         public bool isNpc;
         
         [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private Collider2D myCollider;
+        public Collider2D myCollider;
         
         private float _moveSpeed = 5.0f;
-        private PlayerInput _playerInput;
+        public PlayerInput playerInput;
         private Vector2 _movement;
         private Vector2 _previousMovement;
 
@@ -24,33 +23,39 @@ namespace DefaultNamespace
         private bool _isCarryingSomething;
 
         private GameObject _dropHighlight;
-        private int2 _myGridPosition;
+        public int2 myGridPosition;
         private int2 _dropPosition;
         private int2 _throwPosition;
 
         private Entity _entity;
         private bool _isEntity => _entity != null;
-        private StateMachine _stateMachine;
+        public StateMachine stateMachine;
         
         private void Start()
         {
+            myCollider = GetComponent<Collider2D>();
             _entity = GetComponent<Entity>();
-            _playerInput = GetComponent<PlayerInput>();
+            playerInput = GetComponent<PlayerInput>();
             _dropHighlight = Instantiate(Resources.Load("DropHighlight") as GameObject);
             _dropHighlight.SetActive(false);
-
+            myGridPosition = myCollider.bounds.center.GetGridPosition();
+            
             if (isNpc)
             {
-                _stateMachine = new StateMachine();
-                _stateMachine.AddState(new SpawnState(_stateMachine));
-                GameManager.Instance.AddStateMachine(_stateMachine);
-                _stateMachine.ChangeState(typeof(SpawnState));
+                _moveSpeed = 1.0f;
+                stateMachine = new StateMachine();
+                stateMachine.AddState(new SpawnState(stateMachine, this));
+                stateMachine.AddState(new MoveToGoalState(stateMachine, this));
+                stateMachine.AddState(new GettingCarriedState(stateMachine, this));
+                stateMachine.AddState(new DroppedState(stateMachine, this));
+                GameManager.Instance.AddStateMachine(stateMachine);
+                stateMachine.ChangeState(typeof(SpawnState));
             }
         }
 
         private void Update()
         {
-            _myGridPosition = myCollider.bounds.center.GetGridPosition();
+            myGridPosition = myCollider.bounds.center.GetGridPosition();
 
             if (!isNpc)
             {
@@ -58,7 +63,7 @@ namespace DefaultNamespace
                 UpdateDropHiglight();
                 UpdateInteractables();
             
-                if (_playerInput.IsButtonDown(PlayerInput.Button.A))
+                if (playerInput.IsButtonDown(PlayerInput.Button.A))
                 {
                     if (!_isCarryingSomething)
                     {
@@ -79,8 +84,8 @@ namespace DefaultNamespace
                 return;
             }
             
-            _movement.x = _playerInput.Horizontal;
-            _movement.y = _playerInput.Vertical;
+            _movement.x = playerInput.Horizontal;
+            _movement.y = playerInput.Vertical;
             _movement = _movement.normalized;
             if (_movement.x != 0.0f || _movement.y != 0.0f)
             {
@@ -92,17 +97,17 @@ namespace DefaultNamespace
         private void UpdateDropPosition()
         {
             Vector2 v;
-            v.x = _playerInput.Horizontal;
-            v.y = _playerInput.Vertical;
+            v.x = playerInput.Horizontal;
+            v.y = playerInput.Vertical;
             v.Normalize();
             // if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
             // {
-            Vector3 dropPos = _myGridPosition.GetWorldPosition() + (Vector3) _previousMovement * 0.75f;
+            Vector3 dropPos = myGridPosition.GetWorldPosition() + (Vector3) _previousMovement * 0.75f;
                 _dropPosition = dropPos.GetGridPosition();
             // }
             // else
             // {
-                Vector3 throwPos = _myGridPosition.GetWorldPosition() + (Vector3) v * 5.0f;
+                Vector3 throwPos = myGridPosition.GetWorldPosition() + (Vector3) v * 5.0f;
                 _throwPosition = throwPos.GetGridPosition();
             // }
         }
@@ -119,8 +124,8 @@ namespace DefaultNamespace
                 // _dropHighlight.transform.position = _dropPosition.GetWorldPosition();
 
                 Vector2 v;
-                v.x = _playerInput.Horizontal;
-                v.y = _playerInput.Vertical;
+                v.x = playerInput.Horizontal;
+                v.y = playerInput.Vertical;
                 v.Normalize();
                 if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
                 {
@@ -153,11 +158,11 @@ namespace DefaultNamespace
 
         private void TryDrop()
         {
-            if (_isCarryingSomething && _playerInput.IsButtonDown(PlayerInput.Button.A))
+            if (_isCarryingSomething && playerInput.IsButtonDown(PlayerInput.Button.A))
             {
                 Vector2 v;
-                v.x = _playerInput.Horizontal;
-                v.y = _playerInput.Vertical;
+                v.x = playerInput.Horizontal;
+                v.y = playerInput.Vertical;
                 v = v.normalized;
                 if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
                 {

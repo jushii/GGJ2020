@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -13,6 +14,9 @@ namespace DefaultNamespace
         public Level level;
 
         public List<StateMachine> stateMachines = new List<StateMachine>();
+        public Entity goalObject;
+
+        public bool refreshPath;
         
         private void Awake()
         {
@@ -27,6 +31,16 @@ namespace DefaultNamespace
             
             level = new Level();
             VisualizeGrid();
+
+            var entities = FindObjectsOfType<Entity>();
+            foreach (var entity in entities)
+            {
+                if (entity.isGoal)
+                {
+                    goalObject = entity;
+                    break;
+                }
+            }
         }
 
         private void Update()
@@ -51,6 +65,8 @@ namespace DefaultNamespace
             {
                 stateMachines[i].LateTick();
             }
+
+            refreshPath = false;
         }
 
         public void AddStateMachine(StateMachine stateMachine)
@@ -84,6 +100,34 @@ namespace DefaultNamespace
                 Vector3 pointB = new Vector3(x * GameConfig.TileWidth, gridWorldSizeY, 0);
                 Gizmos.DrawLine(pointA, pointB);
             }
+
+            for (int i = 0; i < pathfinderResults.Count; i++)
+            {
+                DrawPathGizmos(pathfinderResults[i]);
+            }
         }
+
+        public void AddPathResult(PathfinderResult result)
+        {
+            pathfinderResults.Add(result);
+        }
+        
+        private void DrawPathGizmos(PathfinderResult pathfinderResult)
+        {
+            for (int i = 0; i < pathfinderResult.Path.Count; i++)
+            {
+                if (i >= pathfinderResult.Path.Count - 1) return;
+                
+                int2 gridPosA = pathfinderResult.Path[i].GridPosition;
+                int2 gridPosB = pathfinderResult.Path[i + 1].GridPosition;
+
+                Vector3 worldPosA = gridPosA.GetWorldPosition();
+                Vector3 worldPosB = gridPosB.GetWorldPosition();
+                
+                Gizmos.DrawLine(worldPosA, worldPosB);
+            }
+        }
+        
+        public List<PathfinderResult> pathfinderResults = new List<PathfinderResult>();
     }
 }

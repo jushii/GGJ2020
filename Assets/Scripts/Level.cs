@@ -4,7 +4,7 @@ namespace DefaultNamespace
 {
     public class Level
     {
-        private readonly Tile[] grid;
+        public readonly Tile[] grid;
         
         public Level()
         {
