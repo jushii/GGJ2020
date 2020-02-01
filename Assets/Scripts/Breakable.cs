@@ -5,6 +5,8 @@ using UnityEngine;
 public class Breakable : MonoBehaviour
 {
     [SerializeField] private BreakableConditionUI uiConditionPrefab;
+    [SerializeField] SpriteRenderer _sprRenderer;
+    [SerializeField] Sprite[] _sprites;
     public int2 GridPosition;
     private float _health;
     private BreakableConditionUI _conditionUi;
@@ -30,5 +32,22 @@ public class Breakable : MonoBehaviour
     {
         _health = Mathf.Clamp(hp, 0, 1.0f);
         _conditionUi.SetCondition(_health);
+        UpdateSpriteState(_health);
+    }
+
+    private void UpdateSpriteState(float _health)
+    {
+        if (_sprites.Length > 2)
+        {
+            float p = 1 / _sprites.Length;
+            for(int i = 0; i < _sprites.Length; i++)
+            {
+                if(_health<= 1- (p * i))
+                {
+                    _sprRenderer.sprite = _sprites[i];
+                    return;
+                }
+            }
+        }
     }
 }
