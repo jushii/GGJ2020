@@ -12,11 +12,19 @@ namespace DefaultNamespace
             for (int i = 0; i < grid.Length; i++)
             {
                 grid[i].GridPosition = new int2(GetPosition(i));
+                grid[i].IsBlocked = false;
             }
         }
         
-        private Tile GetTile(int2 position)
+        public Tile GetTile(int2 position)
         {
+            int x = position.x;
+            int y = position.y;
+            if (x < 0 || x >= GameConfig.GridSizeX || y < 0 || y >= GameConfig.GridSizeY)
+            {
+                return new Tile(){GridPosition = new int2(int.MinValue, int.MinValue), IsBlocked = true};
+            }
+            
             return grid[GetIndex(position)];
         }
         
@@ -25,11 +33,19 @@ namespace DefaultNamespace
             return (position.y * GameConfig.GridSizeX) + position.x;
         }
         
-        public void SetBlocked(int2 gridPosition)
+        public void MakeUnwalkable(int2 gridPosition)
         {
             int index = GetIndex(gridPosition);
             Tile tile = GetTile(gridPosition);
             tile.IsBlocked = true;
+            grid[index] = tile;
+        }
+
+        public void MakeWalkable(int2 gridPosition)
+        {
+            int index = GetIndex(gridPosition);
+            Tile tile = GetTile(gridPosition);
+            tile.IsBlocked = false;
             grid[index] = tile;
         }
         

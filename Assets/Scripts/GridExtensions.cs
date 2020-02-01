@@ -21,8 +21,8 @@
                 int x = Mathf.FloorToInt(worldPosition.x);
                 int y = Mathf.FloorToInt(worldPosition.y);
                 
-                if (x < 0 || x >= GameConfig.GridSizeX || y < 0 || y >= GameConfig.GridSizeY) 
-                    return new int2(int.MinValue, int.MinValue); 
+                // if (x < 0 || x >= GameConfig.GridSizeX || y < 0 || y >= GameConfig.GridSizeY) 
+                //     return new int2(int.MinValue, int.MinValue); 
                 
                 return new int2(x, y);
             }

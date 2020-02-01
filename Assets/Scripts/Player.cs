@@ -73,16 +73,16 @@ namespace DefaultNamespace
             v.x = _playerInput.Horizontal;
             v.y = _playerInput.Vertical;
             v.Normalize();
-            if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
-            {
-                Vector3 pos = _myGridPosition.GetWorldPosition() + (Vector3) _previousMovement * 1.0f;
-                _dropPosition = pos.GetGridPosition();
-            }
-            else
-            {
-                Vector3 pos = _myGridPosition.GetWorldPosition() + (Vector3) v * 5.0f;
-                _throwPosition = pos.GetGridPosition();
-            }
+            // if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
+            // {
+            Vector3 dropPos = _myGridPosition.GetWorldPosition() + (Vector3) _previousMovement * 0.75f;
+                _dropPosition = dropPos.GetGridPosition();
+            // }
+            // else
+            // {
+                Vector3 throwPos = _myGridPosition.GetWorldPosition() + (Vector3) v * 5.0f;
+                _throwPosition = throwPos.GetGridPosition();
+            // }
         }
         
         private void UpdateDropHiglight()
@@ -139,13 +139,19 @@ namespace DefaultNamespace
                 v = v.normalized;
                 if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
                 {
+                    Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
+                    if (tile.IsBlocked) return;
+                    
                     _currentInteractableCandidate.OnDrop(_dropPosition);
                     _currentInteractableCandidate = null;
                     _isCarryingSomething = false;
                 }
                 else
                 {
-                    _currentInteractableCandidate.OnThrow(_throwPosition);
+                    Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
+                    if (tile.IsBlocked) return;
+                    
+                    _currentInteractableCandidate.OnThrow(_dropPosition, _throwPosition);
                     _currentInteractableCandidate = null;
                     _isCarryingSomething = false;
                 }
