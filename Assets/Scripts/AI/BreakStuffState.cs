@@ -18,7 +18,6 @@ namespace DefaultNamespace
         
         public override void EnterState(object args)
         {
-            // Debug.Log("break stuff state");
             _player.playerInput.Horizontal = 0.0f;
             _player.playerInput.Vertical = 0.0f;
         }
