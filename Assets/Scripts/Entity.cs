@@ -78,7 +78,7 @@ namespace DefaultNamespace
 
         public void OnDrop(int2 dropPosition)
         {
-            transform.position = dropPosition.GetWorldPosition() + (Vector3)_myCollider.offset;
+            transform.position = dropPosition.GetWorldPosition() + Vector3.up * (Mathf.Abs(_myCollider.offset.y));
             _carrierCollider = null;
             _myCollider.enabled = true;
             DisableHighlight();
@@ -92,8 +92,8 @@ namespace DefaultNamespace
         public void OnThrow(int2 dropDestination, int2 throwDestination)
         {
             _myThrowDestination = throwDestination;
-            
-            Vector3 throwWorldDest = throwDestination.GetWorldPosition() + (Vector3)_myCollider.offset;
+
+            Vector3 throwWorldDest = throwDestination.GetWorldPosition() + Vector3.up * (Mathf.Abs(_myCollider.offset.y));
             throwWorldDest.z = 0.0f;
             
             _throwTween = transform.DOMove(throwWorldDest, 0.25f)
@@ -110,7 +110,7 @@ namespace DefaultNamespace
             Tile tile = GameManager.Instance.level.GetTile(currentFlyingPos);
             if (tile.IsBlocked)
             {
-                _throwTween.ChangeEndValue(_myThrowDestination.GetWorldPosition() + (Vector3)_myCollider.offset);
+                _throwTween.ChangeEndValue(_myThrowDestination.GetWorldPosition() + Vector3.up * (Mathf.Abs(_myCollider.offset.y)));
                 _throwTween.Complete();
                 OnDrop(_myThrowDestination);
             }

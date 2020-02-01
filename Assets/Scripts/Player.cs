@@ -154,7 +154,7 @@ namespace DefaultNamespace
                 {
                     Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
                     if (tile.IsBlocked) return;
-                    
+
                     _currentInteractableCandidate.OnDrop(_dropPosition);
                     _currentInteractableCandidate = null;
                     _isCarryingSomething = false;

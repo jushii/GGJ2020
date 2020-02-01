@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     private Player _player;
-    private string _horizontalAxis;
-    private string _verticalAxis;
-    private string _aButton;
-    private string _bButton;
-    private string _xButton;
-    private string _yButton;
-    private string _triggerAxis;
-    private int _controllerNumber;
+    public string _horizontalAxis;
+    public string _verticalAxis;
+    public string _aButton;
+    public string _bButton;
+    public string _xButton;
+    public string _yButton;
+    public string _triggerAxis;
+    public int _controllerNumber;
     
     public float Horizontal { get; set; }
     public float Vertical { get; set; }
