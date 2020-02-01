@@ -10,6 +10,7 @@ public class Breakable : MonoBehaviour
     [SerializeField] private Entity entity;
     [SerializeField] private BoxCollider2D myCollider;
     [SerializeField] private BreakableConditionUI uiConditionPrefab;
+    [SerializeField] private float amplify_damage_taken = 1;
 
     public Transform sprite;
     public SpriteRenderer spriteRenderer;
