@@ -12,7 +12,6 @@ namespace DefaultNamespace
         private void Start()
         {
             GridPosition = transform.position.GetGridPosition();
-            GameManager.Instance.level.MakeUnwalkable(GridPosition);
             transform.position = GridPosition.GetWorldPosition();
         }
     }

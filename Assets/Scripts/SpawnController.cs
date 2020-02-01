@@ -19,7 +19,7 @@ namespace DefaultNamespace
 
         private IEnumerator StartSpawning()
         {
-            yield return new WaitForSeconds(10.0f);
+            yield return new WaitForSeconds(2.0f);
             
             while (true)
             {

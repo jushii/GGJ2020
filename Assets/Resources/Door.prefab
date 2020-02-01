@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4438550361948699616}
   - component: {fileID: 4438550361948699617}
-  - component: {fileID: 4438550361948699618}
+  - component: {fileID: 1355575041569064040}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -59,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4438550361948699618
+--- !u!114 &1355575041569064040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,21 +68,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4438550361948699619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a294a30d039940b484a956dbd6104eab, type: 3}
+  m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 4438550362866755357}
-  normalMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  outlineMaterial: {fileID: 2100000, guid: f7cfb8b82b7044802b656cb356f2a075, type: 2}
-  outline: {fileID: 4438550362866755359}
-  isPickup: 1
-  isBreakable: 0
-  isGoal: 0
-  myPosition:
-    x: 0
-    y: 0
-  isBeingCarried: 0
-  isCarryingGoal: 0
 --- !u!1 &4438550362866755352
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +98,7 @@ Transform:
   m_GameObject: {fileID: 4438550362866755352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.6666667, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4438550361948699616}
   m_RootOrder: 0
@@ -153,7 +141,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0edaf99e9e115414d8232427d2801ec1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af0018ddfe29cb04885c413030088918, type: 3}
   m_Color: {r: 1, g: 0.5763481, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
