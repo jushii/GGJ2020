@@ -7,12 +7,12 @@ namespace DefaultNamespace
     public class Player : MonoBehaviour
     {
         public int playerNumber;
-        public bool isNpc;
+        public bool isNpc => playerNumber != 1 && playerNumber != 2;
         
         [SerializeField] private Rigidbody2D rb;
         public Collider2D myCollider;
         
-        private float _moveSpeed = 5.0f;
+        internal float moveSpeed = 5.0f;
         public PlayerInput playerInput;
         private Vector2 _movement;
         private Vector2 _previousMovement;
@@ -30,6 +30,7 @@ namespace DefaultNamespace
         private Entity _entity;
         private bool _isEntity => _entity != null;
         public StateMachine stateMachine;
+        public bool npcHasTheGoal;
         
         private void Start()
         {
@@ -42,12 +43,13 @@ namespace DefaultNamespace
             
             if (isNpc)
             {
-                _moveSpeed = 1.5f;
+                moveSpeed = 1.5f;
                 stateMachine = new StateMachine();
                 stateMachine.AddState(new SpawnState(stateMachine, this));
                 stateMachine.AddState(new MoveToGoalState(stateMachine, this));
                 stateMachine.AddState(new GettingCarriedState(stateMachine, this));
                 stateMachine.AddState(new DroppedState(stateMachine, this));
+                stateMachine.AddState(new StealState(stateMachine, this));
                 GameManager.Instance.AddStateMachine(stateMachine);
                 stateMachine.ChangeState(typeof(SpawnState));
             }
@@ -98,7 +100,7 @@ namespace DefaultNamespace
             {
                 _previousMovement = _movement;
             }
-            rb.MovePosition(rb.position + _movement * _moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + _movement * moveSpeed * Time.fixedDeltaTime);
         }
 
         private void UpdateDropPosition()

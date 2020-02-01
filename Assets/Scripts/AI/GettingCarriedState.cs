@@ -17,6 +17,7 @@ namespace DefaultNamespace
         {
             _player.playerInput.Horizontal = 0.0f;
             _player.playerInput.Vertical = 0.0f;
+            _player.moveSpeed = 1.5f;
         }
 
         public override void ExitState()

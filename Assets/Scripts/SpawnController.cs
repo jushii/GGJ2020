@@ -8,7 +8,7 @@ namespace DefaultNamespace
     public class SpawnController : MonoBehaviour
     {
         [SerializeField] private GameObject villagerPrefab;
-        [SerializeField] private SpawnPoint[] spawnPoints;
+        public SpawnPoint[] spawnPoints;
 
         private WaitForSeconds spawnWaitTime = new WaitForSeconds(20);
 

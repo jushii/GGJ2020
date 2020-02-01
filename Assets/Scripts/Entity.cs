@@ -36,6 +36,8 @@ namespace DefaultNamespace
 
         private bool _updateWalkable;
         private bool _updateUnwalkable;
+
+        public bool isCarryingGoal;
         
         private void Start()
         {
@@ -103,13 +105,24 @@ namespace DefaultNamespace
 
             if (_player != null && _player.isNpc)
             {
+                if (isCarryingGoal)
+                {
+                    GameManager.Instance.goalObject.OnDrop(myPosition);
+                    isCarryingGoal = false;
+                }
+                
                 _player.stateMachine.ChangeState(typeof(GettingCarriedState));
             }
         }
 
         public void OnSteal(Collider2D stealer)
         {
-            _carrierCollider.transform.GetComponent<Player>().OnDrop();
+            if (_carrierCollider != null)
+            {
+                _carrierCollider.transform.GetComponent<Player>().OnDrop();
+            }
+            
+            stealer.GetComponent<Entity>().isCarryingGoal = true;
             OnPickup(stealer);
         }
         

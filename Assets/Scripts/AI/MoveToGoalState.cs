@@ -21,6 +21,7 @@ namespace DefaultNamespace
         {
             _player = player;
             _interval = Random.Range(10, 25);
+            _player.moveSpeed = 1.5f;
         }
         
         public override void EnterState(object args)
@@ -58,6 +59,7 @@ namespace DefaultNamespace
                     _player.playerInput.Vertical = 0.0f;
                     _nextPathPositionIndex = -1;
                     _canMove = false;
+                    GrabTheGoal();
                 }
                 return;
             }
@@ -91,7 +93,7 @@ namespace DefaultNamespace
 
         private void GrabTheGoal()
         {
-            
+            StateMachine.ChangeState(typeof(StealState));
         }
     }
 }
