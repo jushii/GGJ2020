@@ -19,6 +19,7 @@ namespace DefaultNamespace
 
         private IEnumerator StartSpawning()
         {
+
             yield return new WaitForSeconds(10.0f);
             
             while (true)
@@ -34,5 +35,7 @@ namespace DefaultNamespace
         {
             return spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
         }
+
+        
     }
 }
