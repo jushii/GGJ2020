@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -11,6 +12,8 @@ namespace DefaultNamespace
         
         public Level level;
 
+        public List<StateMachine> stateMachines = new List<StateMachine>();
+        
         private void Awake()
         {
             if (Instance == null)
@@ -21,12 +24,38 @@ namespace DefaultNamespace
             {
                 Destroy(this);
             }
-        }
-
-        private void Start()
-        {
+            
             level = new Level();
             VisualizeGrid();
+        }
+
+        private void Update()
+        {
+            for (int i = 0; i < stateMachines.Count; i++)
+            {
+                stateMachines[i].Tick();
+            }
+        }
+        
+        private void FixedUpdate()
+        {
+            for (int i = 0; i < stateMachines.Count; i++)
+            {
+                stateMachines[i].FixedTick();
+            }
+        }
+        
+        private void LateUpdate()
+        {
+            for (int i = 0; i < stateMachines.Count; i++)
+            {
+                stateMachines[i].LateTick();
+            }
+        }
+
+        public void AddStateMachine(StateMachine stateMachine)
+        {
+            stateMachines.Add(stateMachine);
         }
         
         private void VisualizeGrid()

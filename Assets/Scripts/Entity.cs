@@ -13,27 +13,45 @@ namespace DefaultNamespace
         [SerializeField] private Material outlineMaterial;
         [SerializeField] private SpriteOutline outline;
     
+        [Header("Can be picked up")]
         public bool isPickup;
+
+        [Header("Can be broken")]
+        public bool isBreakable; // todo
+
+        [Header("Is goal")] 
+        public bool isGoal;
+        
+        private Collider2D _myCollider;
+
+        // Pickup / throwing
         public int2 myPosition;
         private int2 _myAirPosition;
         private int2 _myThrowDestination;
-        
-        private Collider2D _myCollider;
         private Collider2D _carrierCollider;
-        private bool _isBeingCarried;
+        public bool isBeingCarried;
         private float _carryOffsetY = 1.25f;
         private Tweener _throwTween;
+
+        private Player _player;
         
         private void Start()
         {
-            int2 gridPosition = transform.position.GetGridPosition();
+            _player = GetComponentInParent<Player>();
+            if (_player != null)
+            {
+                
+            }
+            
+            _myCollider = GetComponent<Collider2D>();
+            int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
             Vector3 gridWorldPosition = gridPosition.GetWorldPosition();
             transform.position = gridWorldPosition;
             myPosition = gridPosition;
             GameManager.Instance.level.MakeUnwalkable(myPosition);
             
-            _myCollider = GetComponent<Collider2D>();
             outline.color = Color.green;
+            
             DisableHighlight();
         }
 
@@ -55,12 +73,12 @@ namespace DefaultNamespace
 
             GameManager.Instance.level.MakeWalkable(myPosition);
 
-            _isBeingCarried = true;
+            isBeingCarried = true;
         }
 
         public void OnDrop(int2 dropPosition)
         {
-            transform.position = dropPosition.GetWorldPosition();
+            transform.position = dropPosition.GetWorldPosition() + (Vector3)_myCollider.offset;
             _carrierCollider = null;
             _myCollider.enabled = true;
             DisableHighlight();
@@ -68,14 +86,14 @@ namespace DefaultNamespace
             myPosition = dropPosition;
             GameManager.Instance.level.MakeUnwalkable(dropPosition);
 
-            _isBeingCarried = false;
+            isBeingCarried = false;
         }
 
         public void OnThrow(int2 dropDestination, int2 throwDestination)
         {
             _myThrowDestination = throwDestination;
             
-            Vector3 throwWorldDest = throwDestination.GetWorldPosition();
+            Vector3 throwWorldDest = throwDestination.GetWorldPosition() + (Vector3)_myCollider.offset;
             throwWorldDest.z = 0.0f;
             
             _throwTween = transform.DOMove(throwWorldDest, 0.25f)
@@ -88,25 +106,23 @@ namespace DefaultNamespace
 
         private void CheckIfCollidedWhileFlying()
         {
-            int2 currentFlyingPos = transform.position.GetGridPosition();
+            int2 currentFlyingPos = _myCollider.bounds.center.GetGridPosition();
             Tile tile = GameManager.Instance.level.GetTile(currentFlyingPos);
             if (tile.IsBlocked)
             {
-                Debug.Log("collide!");
-                _throwTween.ChangeEndValue(_myThrowDestination.GetWorldPosition());
+                _throwTween.ChangeEndValue(_myThrowDestination.GetWorldPosition() + (Vector3)_myCollider.offset);
                 _throwTween.Complete();
                 OnDrop(_myThrowDestination);
             }
             else
             {
-                Debug.Log("not collide!");
                 _myThrowDestination = currentFlyingPos;
             }
         }
         
         private void Update()
         {
-            if (_isBeingCarried)
+            if (isBeingCarried)
             {
                 Vector3 carryPosition = _carrierCollider.bounds.center + Vector3.up * _carryOffsetY;
                 carryPosition.z = 0.0f;

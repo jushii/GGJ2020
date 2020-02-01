@@ -46,6 +46,8 @@ public class PlayerInput : MonoBehaviour
 
     private void SetControllerNumber(int number)
     {
+        if (number == 0) return;
+        
         _controllerNumber = number;
         _horizontalAxis = "Joystick_" + _controllerNumber + "_Horizontal";
         _verticalAxis = "Joystick_" + _controllerNumber + "_Vertical";

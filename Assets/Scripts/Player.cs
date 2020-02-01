@@ -8,6 +8,7 @@ namespace DefaultNamespace
     public class Player : MonoBehaviour
     {
         public int playerNumber;
+        public bool isNpc;
         
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private Collider2D myCollider;
@@ -26,9 +27,13 @@ namespace DefaultNamespace
         private int2 _myGridPosition;
         private int2 _dropPosition;
         private int2 _throwPosition;
+
+        private Entity _entity;
+        private bool _isEntity => _entity != null;
         
         private void Awake()
         {
+            _entity = GetComponent<Entity>();
             _playerInput = GetComponent<PlayerInput>();
             _dropHighlight = Instantiate(Resources.Load("DropHighlight") as GameObject);
             _dropHighlight.SetActive(false);
@@ -38,25 +43,33 @@ namespace DefaultNamespace
         {
             _myGridPosition = myCollider.bounds.center.GetGridPosition();
 
-            UpdateDropPosition();
-            UpdateDropHiglight();
-            UpdateInteractables();
-            
-            if (_playerInput.IsButtonDown(PlayerInput.Button.A))
+            if (!isNpc)
             {
-                if (!_isCarryingSomething)
+                UpdateDropPosition();
+                UpdateDropHiglight();
+                UpdateInteractables();
+            
+                if (_playerInput.IsButtonDown(PlayerInput.Button.A))
                 {
-                    TryPickup();
-                }
-                else
-                {
-                    TryDrop();
+                    if (!_isCarryingSomething)
+                    {
+                        TryPickup();
+                    }
+                    else
+                    {
+                        TryDrop();
+                    }
                 }
             }
         }
 
         private void FixedUpdate()
         {
+            if (_isEntity && _entity.isBeingCarried)
+            {
+                return;
+            }
+            
             _movement.x = _playerInput.Horizontal;
             _movement.y = _playerInput.Vertical;
             _movement = _movement.normalized;
