@@ -176,6 +176,7 @@ MonoBehaviour:
     x: 0
     y: 0
   npcHasTheGoal: 0
+  animator: {fileID: 0}
   _playerAnimation: 0
 --- !u!58 &998261271
 CircleCollider2D:
