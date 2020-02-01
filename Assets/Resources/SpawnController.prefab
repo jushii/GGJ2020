@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ea1828b26d483c8afa20fb4d470425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  villagerPrefab: {fileID: 0}
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}

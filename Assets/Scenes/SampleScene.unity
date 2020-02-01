@@ -4091,7 +4091,7 @@ PrefabInstance:
     - target: {fileID: 5329793327682645636, guid: 9c143837e997efa48a8410b9a6b8254f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.93516773
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5329793327682645636, guid: 9c143837e997efa48a8410b9a6b8254f,
         type: 3}
@@ -9487,6 +9487,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnController
       objectReference: {fileID: 0}
+    - target: {fileID: 2814888071487851145, guid: 889add97909084347a7d816369213043,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3119572008250923516, guid: 889add97909084347a7d816369213043,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9988,7 +9993,7 @@ PrefabInstance:
     - target: {fileID: 4414344326367690610, guid: bbaa7d1d44034b24daacaf5d9f5f1ccf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.93516773
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4414344326367690610, guid: bbaa7d1d44034b24daacaf5d9f5f1ccf,
         type: 3}

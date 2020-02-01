@@ -233,13 +233,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 0
-  isNpc: 1
   rb: {fileID: 986119875772964487}
   myCollider: {fileID: 986119875772964486}
   playerInput: {fileID: 0}
   myGridPosition:
     x: 0
     y: 0
+  npcHasTheGoal: 0
+  _playerAnimation: 0
 --- !u!114 &986119875772964484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,3 +284,4 @@ MonoBehaviour:
     x: 0
     y: 0
   isBeingCarried: 0
+  isCarryingGoal: 0
