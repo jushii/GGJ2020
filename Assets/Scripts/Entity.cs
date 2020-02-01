@@ -132,7 +132,7 @@ namespace DefaultNamespace
         
         public void OnDrop(int2 dropPosition)
         {
-            transform.position = dropPosition.GetWorldPosition() + Vector3.up * (Mathf.Abs(_myCollider.offset.y));
+            transform.position = dropPosition.GetWorldPosition();
             _carrierCollider = null;
             _myCollider.enabled = true;
             DisableHighlight();
@@ -145,10 +145,10 @@ namespace DefaultNamespace
             myPosition = dropPosition;
             // GameManager.Instance.level.MakeUnwalkable(dropPosition);
 
-            if (_player == null)
-            {
-                _updateUnwalkable = true;
-            }
+            // if (_player == null)
+            // {
+            //     _updateUnwalkable = true;
+            // }
             
             isBeingCarried = false;
             
@@ -158,37 +158,40 @@ namespace DefaultNamespace
             }
         }
 
-        public void OnThrow(int2 dropDestination, int2 throwDestination)
+        public void OnThrow(int2 throwDestination)
         {
             _myThrowDestination = throwDestination;
 
-            Vector3 throwWorldDest = throwDestination.GetWorldPosition() + Vector3.up * (Mathf.Abs(_myCollider.offset.y));
-            throwWorldDest.z = 0.0f;
+            // If we are not throwing an NPC, make destination unwalkable.
+            if (_player == null)
+            {
+                GameManager.Instance.level.MakeUnwalkable(_myThrowDestination);
+            }
             
-            _throwTween = transform.DOMove(throwWorldDest, 0.35f)
-                .SetUpdate(UpdateType.Late)
-                .OnUpdate(CheckIfCollidedWhileFlying)
+            Vector3 throwWorldDest = throwDestination.GetWorldPosition();
+            
+            _throwTween = transform.DOMove(throwWorldDest, 0.25f)
                 .OnComplete(() =>
                 {
                     OnDrop(_myThrowDestination);
                 });
         }
 
-        private void CheckIfCollidedWhileFlying()
-        {
-            int2 currentFlyingPos = _myCollider.bounds.center.GetGridPosition();
-            Tile tile = GameManager.Instance.level.GetTile(currentFlyingPos);
-            if (tile.IsBlocked)
-            {
-                _throwTween.ChangeEndValue(_myThrowDestination.GetWorldPosition() + (Vector3.up * (Mathf.Abs(_myCollider.offset.y))));
-                _throwTween.Complete();
-                OnDrop(_myThrowDestination);
-            }
-            else
-            {
-                _myThrowDestination = currentFlyingPos;
-            }
-        }
+        // private void CheckIfCollidedWhileFlying()
+        // {
+        //     int2 currentFlyingPos = _myCollider.bounds.center.GetGridPosition();
+        //     Tile tile = GameManager.Instance.level.GetTile(currentFlyingPos);
+        //     if (tile.IsBlocked)
+        //     {
+        //         _throwTween.ChangeEndValue(_myThrowDestination.GetWorldPosition() + (Vector3.up * (Mathf.Abs(_myCollider.offset.y))));
+        //         _throwTween.Complete();
+        //         OnDrop(_myThrowDestination);
+        //     }
+        //     else
+        //     {
+        //         _myThrowDestination = currentFlyingPos;
+        //     }
+        // }
         
         private void Update()
         {

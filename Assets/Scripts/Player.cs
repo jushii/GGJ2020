@@ -316,15 +316,46 @@ namespace DefaultNamespace
         {
             if (_isCarryingSomething && playerInput.IsButtonDown(PlayerInput.Button.A))
             {
-                Vector2 v;
-                v.x = playerInput.Horizontal;
-                v.y = playerInput.Vertical;
-                v = v.normalized;
+                // Vector2 v;
+                // v.x = playerInput.Horizontal;
+                // v.y = playerInput.Vertical;
+                // v = v.normalized;
+
+                bool wasThrowSuccess = false;
+                int2 throwDestination = new int2();
                 
-                if (!isNpc)
+                Vector2 throwOrigin = myCollider.bounds.center;
+                float circleCastRadius = 0.1f;
+                float throwDistance = 5.0f;
+                int layerMask = 1 << LayerMask.NameToLayer("Collision");
+                
+                RaycastHit2D hit = Physics2D.CircleCast(throwOrigin, circleCastRadius, _previousMovement, throwDistance, layerMask);
+                if (!hit)
                 {
-                    SetPlayerAnimation(PlayerAnimation.Run);
+                    // 1. Empty position at destination, just throw & snap there since it's empty.
+                    Debug.DrawRay(throwOrigin, _previousMovement * throwDistance, Color.green);
+                    Vector3 emptyPosition = throwOrigin + (_previousMovement * throwDistance);
+                    throwDestination = emptyPosition.GetGridPosition();
+                    wasThrowSuccess = true;
                 }
+                else
+                {
+                    float length = hit.distance;
+                    if (length >= 0.7f)
+                    {
+                        var hitNormal = hit.normal;
+                        var hitColliderCenter = hit.collider.bounds.center;
+                        int2 hitColliderGridPosition = hitColliderCenter.GetGridPosition();
+                        int2 neighbour = hitColliderGridPosition + new int2((int)hitNormal.x, (int)hitNormal.y);
+                        throwDestination = neighbour;
+                        wasThrowSuccess = true;
+                    }
+                }
+                
+                // if (!isNpc)
+                // {
+                //     SetPlayerAnimation(PlayerAnimation.Run);
+                // }
                 
                 // if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
                 // {
@@ -337,12 +368,15 @@ namespace DefaultNamespace
                 // }
                 // else
                 // {
-                    Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
-                    if (tile.IsBlocked) return;
-                    
-                    _currentInteractableCandidate.OnThrow(_dropPosition, _throwPosition);
+                // Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
+                // if (tile.IsBlocked) return;
+
+                if (wasThrowSuccess)
+                {
+                    _currentInteractableCandidate.OnThrow(throwDestination);
                     _currentInteractableCandidate = null;
                     _isCarryingSomething = false;
+                }
                 // }
             }
         }
@@ -397,7 +431,7 @@ namespace DefaultNamespace
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawRay(myCollider.bounds.center, _movement * 1.0f);
+            Gizmos.DrawRay(myCollider.bounds.center, _previousMovement * 1.0f);
         }
 
         public enum PlayerAnimation
