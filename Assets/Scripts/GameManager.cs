@@ -11,6 +11,8 @@ namespace DefaultNamespace
         public static GameManager Instance;
         
         [SerializeField] private GridVisualizer gridVisualizerPrefab;
+        [SerializeField] private GameplayUI gameplayUi;
+        [SerializeField] private SpawnController spawnController;
         
         public Level level;
 
@@ -18,8 +20,17 @@ namespace DefaultNamespace
         public Entity goalObject;
 
         public bool refreshPath;
-        
+
+        public bool areControlsEnabled = false;
         public List<Breakable> breakables = new List<Breakable>();
+
+        private bool inRepairState = false;
+        private float stateRepairTimer = 60.0f;
+        private float repairTimeLimit = 60.0f;
+        
+        private bool inDefenceState = false;
+        private float stateDefenceTimer = 300.0f;
+        private float defenceTimeLimit = 300.0f;
         
         private void Awake()
         {
@@ -49,12 +60,61 @@ namespace DefaultNamespace
             // Debug.Log("total breakables: " + breakables.Count);
         }
 
+        private void Start()
+        {
+            StartCoroutine(gameplayUi.StartStateRepair("1:00", StartRepairState));
+        }
+
+        public void StartRepairState()
+        {
+            Debug.Log("start repair state");
+            stateRepairTimer = repairTimeLimit;
+            inRepairState = true;
+        }
+
+        public void StartDefenceState()
+        {
+            Debug.Log("start defence state");
+            StartCoroutine(spawnController.StartSpawning());
+            stateDefenceTimer = defenceTimeLimit;
+            inDefenceState = true;
+            
+        }
+        
         private void Update()
         {
             for (int i = 0; i < stateMachines.Count; i++)
             {
                 stateMachines[i].Tick();
             }
+
+            if (inRepairState)
+            {
+                stateRepairTimer -= Time.deltaTime;
+
+                if (stateRepairTimer <= 0.0f)
+                {
+                    StartCoroutine(gameplayUi.StartStateDefense("5:00", StartDefenceState));
+
+                    inRepairState = false;
+                    return;
+                }
+                
+                gameplayUi.UpdateProgress(GetFormattedTime(stateRepairTimer), stateRepairTimer / repairTimeLimit);
+            }
+
+            if (inDefenceState)
+            {
+                stateDefenceTimer -= Time.deltaTime;
+                gameplayUi.UpdateProgress(GetFormattedTime(stateDefenceTimer), stateDefenceTimer / defenceTimeLimit);
+            }
+        }
+
+        private string GetFormattedTime(float timer)
+        {
+            int minutes = Mathf.FloorToInt(timer / 60F);
+            int seconds = Mathf.FloorToInt(timer - minutes * 60);
+            return $"{minutes:0}:{seconds:00}";
         }
         
         private void FixedUpdate()
@@ -79,7 +139,7 @@ namespace DefaultNamespace
         {
             stateMachines.Add(stateMachine);
         }
-        
+
         private void VisualizeGrid()
         {
             return;
