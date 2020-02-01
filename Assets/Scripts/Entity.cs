@@ -40,16 +40,17 @@ namespace DefaultNamespace
         private void Start()
         {
             _player = GetComponentInParent<Player>();
-            if (_player != null)
-            {
-                
-            }
             
             _myCollider = GetComponent<Collider2D>();
             int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
             Vector3 gridWorldPosition = gridPosition.GetWorldPosition();
             transform.position = gridWorldPosition;
             myPosition = gridPosition;
+            
+            if (_player == null)
+            {
+                GameManager.Instance.level.MakeUnwalkable(myPosition);
+            }
 
             if (_player != null && _player.isNpc)
             {
