@@ -325,7 +325,7 @@ namespace DefaultNamespace
                 int2 throwDestination = new int2();
                 
                 Vector2 throwOrigin = myCollider.bounds.center;
-                float circleCastRadius = 0.1f;
+                float circleCastRadius = 0.25f;
                 float throwDistance = 5.0f;
                 int layerMask = 1 << LayerMask.NameToLayer("Collision");
                 
@@ -346,7 +346,9 @@ namespace DefaultNamespace
                         var hitNormal = hit.normal;
                         var hitColliderCenter = hit.collider.bounds.center;
                         int2 hitColliderGridPosition = hitColliderCenter.GetGridPosition();
-                        int2 neighbour = hitColliderGridPosition + new int2((int)hitNormal.x, (int)hitNormal.y);
+                        int normalX = Mathf.RoundToInt(hitNormal.x);
+                        int normalY = Mathf.RoundToInt(hitNormal.y);
+                        int2 neighbour = hitColliderGridPosition + new int2(normalX, normalY);
                         throwDestination = neighbour;
                         wasThrowSuccess = true;
                     }

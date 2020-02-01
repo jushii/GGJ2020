@@ -10,7 +10,7 @@ namespace DefaultNamespace
         [SerializeField] private GameObject villagerPrefab;
         public SpawnPoint[] spawnPoints;
 
-        private WaitForSeconds spawnWaitTime = new WaitForSeconds(20);
+        private WaitForSeconds spawnWaitTime = new WaitForSeconds(1);
 
         private void Start()
         {
@@ -20,7 +20,7 @@ namespace DefaultNamespace
         public IEnumerator StartSpawning()
         {
 
-            yield return new WaitForSeconds(10.0f);
+            yield return new WaitForSeconds(1);
             
             while (true)
             {
