@@ -10,6 +10,11 @@ namespace DefaultNamespace
     {
         internal StateMachine StateMachine { get; set; }
 
+        public State(StateMachine stateMachine)
+        {
+            StateMachine = stateMachine;
+        }
+        
         /// <summary>
         /// Called before update methods when entering the state.
         /// </summary>

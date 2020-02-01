@@ -30,13 +30,22 @@ namespace DefaultNamespace
 
         private Entity _entity;
         private bool _isEntity => _entity != null;
+        private StateMachine _stateMachine;
         
-        private void Awake()
+        private void Start()
         {
             _entity = GetComponent<Entity>();
             _playerInput = GetComponent<PlayerInput>();
             _dropHighlight = Instantiate(Resources.Load("DropHighlight") as GameObject);
             _dropHighlight.SetActive(false);
+
+            if (isNpc)
+            {
+                _stateMachine = new StateMachine();
+                _stateMachine.AddState(new SpawnState(_stateMachine));
+                GameManager.Instance.AddStateMachine(_stateMachine);
+                _stateMachine.ChangeState(typeof(SpawnState));
+            }
         }
 
         private void Update()

@@ -7,7 +7,7 @@ namespace DefaultNamespace
     /// <summary>
     /// StateMachine updates the current State.
     /// </summary>
-    public abstract class StateMachine
+    public class StateMachine
     {
         internal State CurrentState { get; set; }
         internal State PreviousState { get; set; }
