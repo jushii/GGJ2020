@@ -51,7 +51,7 @@ public class Breakable : MonoBehaviour
     public void ReduceHealth(float amount)
     {
         float currentHealth = _health;
-        float nextHealth = Mathf.Clamp(currentHealth - amount, 0, 1.0f);
+        float nextHealth = Mathf.Clamp(currentHealth - (amount* amplify_damage_taken), 0, 1.0f);
         SetHealth(nextHealth);
         sprite.transform.DOKill();
         spriteRenderer.DOKill();

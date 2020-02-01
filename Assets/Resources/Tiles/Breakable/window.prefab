@@ -75,6 +75,7 @@ MonoBehaviour:
   myCollider: {fileID: 3545502474057978905}
   uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
     type: 3}
+  amplify_damage_taken: 2
   sprite: {fileID: 3545502475014768870}
   spriteRenderer: {fileID: 3545502475014768869}
   _sprites:
