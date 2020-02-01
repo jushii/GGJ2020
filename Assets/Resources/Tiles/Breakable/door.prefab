@@ -71,11 +71,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCollider: {fileID: 4438550361948699617}
   uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
     type: 3}
-  sprite: {fileID: 4438550362866755358}
-  spriteRenderer: {fileID: 4438550362866755357}
+  _sprRenderer: {fileID: 4438550362866755357}
+  _sprites:
+  - {fileID: 21300000, guid: cf7b505493000464e9a5d9780f0fdb36, type: 3}
+  - {fileID: 21300000, guid: 6228d00bf45a5354a8c79a2709069c3f, type: 3}
+  - {fileID: 21300000, guid: 55dccdd8f869dbb40b99ce4390410b99, type: 3}
   GridPosition:
     x: 0
     y: 0
@@ -149,7 +151,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: af0018ddfe29cb04885c413030088918, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf7b505493000464e9a5d9780f0fdb36, type: 3}
   m_Color: {r: 1, g: 0.5763481, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,4 +176,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 1, b: 0.15280294, a: 1}
   _spriteRenderer: {fileID: 4438550362866755357}
-  _outlineSize: 10
+  _outlineSize: 1.76

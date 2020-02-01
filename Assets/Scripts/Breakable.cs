@@ -9,8 +9,10 @@ public class Breakable : MonoBehaviour
     [SerializeField] private Entity entity;
     [SerializeField] private BoxCollider2D myCollider;
     [SerializeField] private BreakableConditionUI uiConditionPrefab;
+
     public Transform sprite;
     public SpriteRenderer spriteRenderer;
+
     public int2 GridPosition;
     private float _health;
     public BreakableConditionUI conditionUi;
