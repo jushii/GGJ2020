@@ -81,6 +81,7 @@ public class Breakable : MonoBehaviour
     {
         _health = Mathf.Clamp(hp, 0, 1.0f);
         conditionUi.SetCondition(_health);
+        UpdateSpriteState(_health);
 
         if (_health <= 0.0f)
         {
@@ -108,7 +109,7 @@ public class Breakable : MonoBehaviour
     public void DestroyThis()
     {
         myCollider.isTrigger = true;
-        spriteRenderer.enabled = false;
+        //spriteRenderer.enabled = false;
         int2 gridPosition = transform.position.GetGridPosition();
         GameManager.Instance.level.MakeWalkable(gridPosition);
     }
@@ -135,15 +136,21 @@ public class Breakable : MonoBehaviour
 
     private void UpdateSpriteState(float _health)
     {
+        if (_health <= 0)
+        {
+            spriteRenderer.sprite = _sprites[0];
+            return;
+        }
+
         if (_sprites.Length > 2)
         {
-            float p = 1 / _sprites.Length;
-            for (int i = 0; i < _sprites.Length; i++)
+            float p = 1.0f / (float)(_sprites.Length-1);
+            for (int i =0; i < _sprites.Length-1; i++)
             {
-                if (_health <= 1 - (p * i))
+                if (_health < (p * (i)))
                 {
                     spriteRenderer.sprite = _sprites[i];
-                    return;
+                    break;
                 }
             }
         }
