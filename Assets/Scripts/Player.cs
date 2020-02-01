@@ -77,7 +77,14 @@ namespace DefaultNamespace
                 UpdateDropPosition();
                 UpdateDropHiglight();
                 UpdateInteractables();
-            
+
+                if (playerInput.IsButtonDown(PlayerInput.Button.X))
+                {
+                    if (!_isCarryingSomething)
+                    {
+                        Repair();
+                    }
+                }
                 if (playerInput.IsButtonDown(PlayerInput.Button.A))
                 {
                     if (!_isCarryingSomething)
@@ -103,30 +110,29 @@ namespace DefaultNamespace
         {
             switch (playerAnimation)
             {
-                case PlayerAnimation.Idle:
-                {
-                    if (_playerAnimation == playerAnimation) return;
-                    _playerAnimation = playerAnimation;
-                    _animator.SetTrigger("idle");
-                    return;
-                }
-                case PlayerAnimation.Run:
-                {
-                    if (_playerAnimation == playerAnimation) return;
-                    _playerAnimation = playerAnimation;
-                    _animator.SetTrigger("run");
-                    return;
-                }
-                case PlayerAnimation.GrabRun:
-                {
-                    if (_playerAnimation == playerAnimation) return;
-                    _playerAnimation = playerAnimation;
-                    _animator.SetTrigger("grab_run");
-                    return;
-                }
+                // case PlayerAnimation.Idle:
+                // {
+                //     if (_playerAnimation == playerAnimation) return;
+                //     _playerAnimation = playerAnimation;
+                //     _animator.SetTrigger("idle");
+                //     return;
+                // }
+                // case PlayerAnimation.Run:
+                // {
+                //     if (_playerAnimation == playerAnimation) return;
+                //     _playerAnimation = playerAnimation;
+                //     _animator.SetTrigger("run");
+                //     return;
+                // }
+                // case PlayerAnimation.GrabRun:
+                // {
+                //     if (_playerAnimation == playerAnimation) return;
+                //     _playerAnimation = playerAnimation;
+                //     _animator.SetTrigger("grab_run");
+                //     return;
+                // }
                 case PlayerAnimation.Fix:
                 {
-                    if (_playerAnimation == playerAnimation) return;
                     _playerAnimation = playerAnimation;
                     _animator.SetTrigger("fix");
                     return;
@@ -157,6 +163,7 @@ namespace DefaultNamespace
             
             _movement.x = playerInput.Horizontal;
             _movement.y = playerInput.Vertical;
+
             _movement = _movement.normalized;
 
             int sign = Math.Sign(_movement.x);
@@ -226,6 +233,11 @@ namespace DefaultNamespace
                     _dropHighlight.SetActive(false);
                 }
             }
+        }
+
+        private void Repair()
+        {
+            SetPlayerAnimation(PlayerAnimation.Fix);
         }
         
         private void TryPickup()
