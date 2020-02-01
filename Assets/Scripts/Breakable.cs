@@ -22,6 +22,8 @@ public class Breakable : MonoBehaviour
     public BreakableConditionUI conditionUi;
     private Color originalColor;
 
+    internal float startHealth;
+    
     public float Health => _health;
     private Entity _entity;
 
@@ -34,7 +36,7 @@ public class Breakable : MonoBehaviour
         GameObject ui = GameObject.Find("BreakableUI");
         conditionUi = Instantiate(uiConditionPrefab, ui.transform);
 
-        SetHealth(1.0f);
+        SetHealth(startHealth);
 
         conditionUi.transform.localScale = Vector3.one;
         conditionUi.Initialize(this);

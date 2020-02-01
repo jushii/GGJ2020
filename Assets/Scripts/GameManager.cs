@@ -57,6 +57,10 @@ namespace DefaultNamespace
             }
 
             breakables = GameObject.FindObjectsOfType<Breakable>().ToList();
+            foreach (var breakable in breakables)
+            {
+                breakable.startHealth = UnityEngine.Random.Range(0.0f, 0.4f);   
+            }
             // Debug.Log("total breakables: " + breakables.Count);
         }
 
