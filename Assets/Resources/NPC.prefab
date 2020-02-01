@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 986119875772964485}
   - component: {fileID: 986119875772964484}
   - component: {fileID: 986119875772964507}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,8 +241,10 @@ MonoBehaviour:
     x: 0
     y: 0
   npcHasTheGoal: 0
+  _spriteRenderer: {fileID: 0}
   animator: {fileID: 6207795901410743373}
   _playerAnimation: 0
+  isFlip: 0
   carryPosition: {fileID: 3113450174611532851}
 --- !u!114 &986119875772964484
 MonoBehaviour:

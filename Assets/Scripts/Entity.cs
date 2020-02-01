@@ -183,6 +183,7 @@ namespace DefaultNamespace
             }
 
             isBeingCarried = false;
+            this.transform.SetParent(null);
 
             if (_player != null && _player.isNpc)
             {

@@ -39,7 +39,7 @@ namespace DefaultNamespace
         {
             bool foundHit = false;
             _player.animator.SetTrigger("attack");
-            
+  
             int colliderHitCount = Physics2D.OverlapCircleNonAlloc(_player.myCollider.bounds.center, 1.2f, _hitResults);
             float neareastSqrDst = float.MaxValue;
             Entity interactionCandidate = null;

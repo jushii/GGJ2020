@@ -2748,6 +2748,7 @@ MonoBehaviour:
   uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
     type: 3}
   amplify_damage_taken: 1
+  reviveCollider: {fileID: 0}
   sprite: {fileID: 1082584211}
   spriteRenderer: {fileID: 1082584209}
   _sprites: []
@@ -3139,7 +3140,7 @@ PrefabInstance:
     - target: {fileID: 986119875772964506, guid: 6d00f2d06dbee6047bb402200f62d67a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 986119875772964507, guid: 6d00f2d06dbee6047bb402200f62d67a,
         type: 3}
@@ -6538,6 +6539,7 @@ MonoBehaviour:
   uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
     type: 3}
   amplify_damage_taken: 1
+  reviveCollider: {fileID: 0}
   sprite: {fileID: 23395229}
   spriteRenderer: {fileID: 23395227}
   _sprites: []
@@ -10551,6 +10553,7 @@ MonoBehaviour:
   uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
     type: 3}
   amplify_damage_taken: 1
+  reviveCollider: {fileID: 0}
   sprite: {fileID: 133092815}
   spriteRenderer: {fileID: 133092813}
   _sprites: []
@@ -34815,6 +34818,7 @@ MonoBehaviour:
   uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
     type: 3}
   amplify_damage_taken: 1
+  reviveCollider: {fileID: 0}
   sprite: {fileID: 178791290}
   spriteRenderer: {fileID: 178791288}
   _sprites: []
