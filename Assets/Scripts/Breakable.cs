@@ -11,6 +11,7 @@ public class Breakable : MonoBehaviour
     [SerializeField] private BoxCollider2D myCollider;
     [SerializeField] private BreakableConditionUI uiConditionPrefab;
     [SerializeField] private float amplify_damage_taken = 1;
+    [SerializeField] private GameObject reviveCollider;
 
     public Transform sprite;
     public SpriteRenderer spriteRenderer;
@@ -90,12 +91,12 @@ public class Breakable : MonoBehaviour
             spriteRenderer.DOKill();
             DestroyThis();
         }
-        else
-        {
-            sprite.transform.DOKill();
-            spriteRenderer.DOKill();
-            ReviveThis();
-        }
+        // else
+        // {
+        //     sprite.transform.DOKill();
+        //     spriteRenderer.DOKill();
+        //     ReviveThis();
+        // }
 
         if (_health >= 1.0f)
         {
@@ -113,10 +114,22 @@ public class Breakable : MonoBehaviour
         //spriteRenderer.enabled = false;
         int2 gridPosition = transform.position.GetGridPosition();
         GameManager.Instance.level.MakeWalkable(gridPosition);
+
+        if (reviveCollider != null)
+        {
+            reviveCollider.SetActive(true);
+        }
     }
 
     public void ReviveThis()
     {
+        if (reviveCollider != null)
+        {
+            reviveCollider.SetActive(false);
+        }
+        
+        SetHealth(0.02f);
+        
         myCollider.isTrigger = false;
         spriteRenderer.enabled = true;
         int2 gridPosition = transform.position.GetGridPosition();

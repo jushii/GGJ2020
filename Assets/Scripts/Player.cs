@@ -250,10 +250,18 @@ namespace DefaultNamespace
             for (int i = 0; i < colliderHitCount; i++)
             {
                 _hitResults[i].TryGetComponent(out Breakable breakable);
+                _hitResults[i].TryGetComponent(out Revive revive);
+                
                 if (breakable != null && breakable.Health > 0.0f)
                 {
                     foundHit = true;
                     breakable.IncreaseHealth(0.02f);
+                    break;
+                }
+
+                if (revive != null)
+                {
+                    revive.ReviveParent();
                     break;
                 }
             }
