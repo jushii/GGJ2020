@@ -7,7 +7,7 @@ namespace DefaultNamespace
     public class Player : MonoBehaviour
     {
         public int playerNumber;
-        public bool isNpc => playerNumber != 1 && playerNumber != 2;
+        public bool isNpc => playerNumber == 0;
         
         [SerializeField] private Rigidbody2D rb;
         public Collider2D myCollider;
@@ -31,9 +31,15 @@ namespace DefaultNamespace
         private bool _isEntity => _entity != null;
         public StateMachine stateMachine;
         public bool npcHasTheGoal;
+
+        private SpriteRenderer _spriteRenderer;
+        private Animator _animator;
+        public PlayerAnimation _playerAnimation;
         
         private void Start()
         {
+            _animator = GetComponentInChildren<Animator>();
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             myCollider = GetComponent<Collider2D>();
             _entity = GetComponent<Entity>();
             playerInput = GetComponent<PlayerInput>();
@@ -52,6 +58,13 @@ namespace DefaultNamespace
                 stateMachine.AddState(new StealState(stateMachine, this));
                 GameManager.Instance.AddStateMachine(stateMachine);
                 stateMachine.ChangeState(typeof(SpawnState));
+                
+                SetPlayerAnimation(PlayerAnimation.Run);
+            }
+            
+            if (!isNpc)
+            {
+                SetPlayerAnimation(PlayerAnimation.Idle);
             }
         }
 
@@ -86,6 +99,55 @@ namespace DefaultNamespace
             }
         }
 
+        public void SetPlayerAnimation(PlayerAnimation playerAnimation)
+        {
+            switch (playerAnimation)
+            {
+                case PlayerAnimation.Idle:
+                {
+                    if (_playerAnimation == playerAnimation) return;
+                    _playerAnimation = playerAnimation;
+                    _animator.SetTrigger("idle");
+                    return;
+                }
+                case PlayerAnimation.Run:
+                {
+                    if (_playerAnimation == playerAnimation) return;
+                    _playerAnimation = playerAnimation;
+                    _animator.SetTrigger("run");
+                    return;
+                }
+                case PlayerAnimation.GrabRun:
+                {
+                    if (_playerAnimation == playerAnimation) return;
+                    _playerAnimation = playerAnimation;
+                    _animator.SetTrigger("grab_run");
+                    return;
+                }
+                case PlayerAnimation.Fix:
+                {
+                    if (_playerAnimation == playerAnimation) return;
+                    _playerAnimation = playerAnimation;
+                    _animator.SetTrigger("fix");
+                    return;
+                }
+                case PlayerAnimation.Grab:
+                {
+                    if (_playerAnimation == playerAnimation) return;
+                    _playerAnimation = playerAnimation;
+                    _animator.SetTrigger("grab");
+                    return;
+                }
+                case PlayerAnimation.Throw:
+                {
+                    if (_playerAnimation == playerAnimation) return;
+                    _playerAnimation = playerAnimation;
+                    _animator.SetTrigger("throw");
+                    return;
+                }
+            }
+        }
+        
         private void FixedUpdate()
         {
             if (_isEntity && _entity.isBeingCarried)
@@ -96,10 +158,22 @@ namespace DefaultNamespace
             _movement.x = playerInput.Horizontal;
             _movement.y = playerInput.Vertical;
             _movement = _movement.normalized;
+
+            int sign = Math.Sign(_movement.x);
+            if (sign == 1)
+            {
+                _spriteRenderer.flipX = true;
+            }
+            else if (sign == -1)
+            {
+                _spriteRenderer.flipX = false;
+            }
+
             if (_movement.x != 0.0f || _movement.y != 0.0f)
             {
                 _previousMovement = _movement;
             }
+
             rb.MovePosition(rb.position + _movement * moveSpeed * Time.fixedDeltaTime);
         }
 
@@ -160,6 +234,11 @@ namespace DefaultNamespace
 
             if (_currentInteractableCandidate != null)
             {
+                if (!isNpc)
+                {
+                    SetPlayerAnimation(PlayerAnimation.Grab);
+                }
+                    
                 _isCarryingSomething = true;
                 _currentInteractableCandidate.OnPickup(myCollider);
             }
@@ -177,7 +256,10 @@ namespace DefaultNamespace
                 // {
                     Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
                     if (tile.IsBlocked) return;
-
+                    if (!isNpc)
+                    {
+                        SetPlayerAnimation(PlayerAnimation.Run);
+                    }
                     _currentInteractableCandidate.OnDrop(_dropPosition);
                     OnDrop();
                 // }
@@ -207,6 +289,12 @@ namespace DefaultNamespace
                 v.x = playerInput.Horizontal;
                 v.y = playerInput.Vertical;
                 v = v.normalized;
+                
+                if (!isNpc)
+                {
+                    SetPlayerAnimation(PlayerAnimation.Run);
+                }
+                
                 // if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
                 // {
                 //     // Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
@@ -278,6 +366,16 @@ namespace DefaultNamespace
         private void OnDrawGizmos()
         {
             Gizmos.DrawRay(myCollider.bounds.center, _movement * 1.0f);
+        }
+
+        public enum PlayerAnimation
+        {
+            Idle = 0,
+            Run = 1,
+            GrabRun = 2,
+            Fix = 3,
+            Throw = 4,
+            Grab = 5
         }
     }
 }

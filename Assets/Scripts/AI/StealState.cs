@@ -27,8 +27,6 @@ namespace DefaultNamespace
         
         public override void EnterState(object args)
         {
-            // Debug.Log("Spawned!");
-            // FindPathToGoal();
             _player.moveSpeed = 2.5f;
             GameManager.Instance.goalObject.OnSteal(_player.myCollider);
             FindNearestGoal();

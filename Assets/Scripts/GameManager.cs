@@ -76,6 +76,7 @@ namespace DefaultNamespace
         
         private void VisualizeGrid()
         {
+            return;
             GridVisualizer gridVisualizer = Instantiate(gridVisualizerPrefab);
             gridVisualizer.DrawGrid();
         }
