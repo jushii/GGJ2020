@@ -17,7 +17,7 @@ namespace DefaultNamespace
             StartCoroutine(StartSpawning());
         }
 
-        private IEnumerator StartSpawning()
+        public IEnumerator StartSpawning()
         {
 
             yield return new WaitForSeconds(10.0f);

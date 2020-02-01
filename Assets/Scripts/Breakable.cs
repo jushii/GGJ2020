@@ -6,21 +6,23 @@ using DG.Tweening;
 
 public class Breakable : MonoBehaviour
 {
+
     [SerializeField] private Entity entity;
     [SerializeField] private BoxCollider2D myCollider;
     [SerializeField] private BreakableConditionUI uiConditionPrefab;
 
     public Transform sprite;
     public SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite[] _sprites;
 
     public int2 GridPosition;
     private float _health;
     public BreakableConditionUI conditionUi;
     private Color originalColor;
-    
+
     public float Health => _health;
     private Entity _entity;
-    
+
     private void Start()
     {
         GridPosition = transform.position.GetGridPosition();
@@ -29,9 +31,9 @@ public class Breakable : MonoBehaviour
         originalColor = spriteRenderer.color;
         GameObject ui = GameObject.Find("BreakableUI");
         conditionUi = Instantiate(uiConditionPrefab, ui.transform);
-        
+
         SetHealth(1.0f);
-        
+
         conditionUi.transform.localScale = Vector3.one;
         conditionUi.Initialize(this);
     }
@@ -44,7 +46,7 @@ public class Breakable : MonoBehaviour
 
         return true;
     }
-    
+
     public void ReduceHealth(float amount)
     {
         float currentHealth = _health;
@@ -74,7 +76,7 @@ public class Breakable : MonoBehaviour
         sprite.transform.localPosition = Vector3.zero;
         sprite.transform.DOShakePosition(0.04f, 0.1f, 5);
     }
-    
+
     public void SetHealth(float hp)
     {
         _health = Mathf.Clamp(hp, 0, 1.0f);
@@ -122,12 +124,28 @@ public class Breakable : MonoBehaviour
     private void Update()
     {
         GridPosition = myCollider.bounds.center.GetGridPosition();
-            
+
         // if (isBeingCarried)
         // {
         //     Vector3 carryPosition = _carrierCollider.bounds.center + Vector3.up * _carryOffsetY;
         //     carryPosition.z = 0.0f;
         //     transform.position = carryPosition;
         // }
+    }
+
+    private void UpdateSpriteState(float _health)
+    {
+        if (_sprites.Length > 2)
+        {
+            float p = 1 / _sprites.Length;
+            for (int i = 0; i < _sprites.Length; i++)
+            {
+                if (_health <= 1 - (p * i))
+                {
+                    spriteRenderer.sprite = _sprites[i];
+                    return;
+                }
+            }
+        }
     }
 }

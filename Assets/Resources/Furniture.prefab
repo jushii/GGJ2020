@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6423782304136227595}
   - component: {fileID: 6423782304136227589}
   - component: {fileID: 6423782304136227594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,8 @@ GameObject:
   - component: {fileID: 6423782304757266525}
   - component: {fileID: 6423782304757266850}
   - component: {fileID: 6423782304757266851}
-  m_Layer: 0
+  - component: {fileID: 1392124416}
+  m_Layer: 8
   m_Name: Furniture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +141,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -179,3 +180,26 @@ MonoBehaviour:
     y: 0
   isBeingCarried: 0
   isCarryingGoal: 0
+  breakable: {fileID: 0}
+--- !u!114 &1392124416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6423782304757266848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  myCollider: {fileID: 6423782304757266850}
+  uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
+    type: 3}
+  sprite: {fileID: 6423782304136227595}
+  spriteRenderer: {fileID: 6423782304136227589}
+  GridPosition:
+    x: 0
+    y: 0
+  conditionUi: {fileID: 0}
