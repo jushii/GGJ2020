@@ -55,6 +55,8 @@ public class Pit : MonoBehaviour
                 timer = 20;
                 isEnable = true;
                 spriteRenderer.sprite = openPit;
+                itemInside = 0;
+
                 gameObject.layer = LayerMask.NameToLayer("Default");
                 return;
             }

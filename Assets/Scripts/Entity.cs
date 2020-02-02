@@ -183,12 +183,26 @@ namespace DefaultNamespace
 
                 for (int i = 0; i < GameManager.Instance.pitPositions.Count; i++)
                 {
-                    Pit pit = GameManager.Instance.pits[i];
-                    if (pit.isEnable)
+                    //if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
+                    //{
+                    //    Pit pit = GameManager.Instance.pits[i];
+                    //    if (pit.isEnable)
+                    //    {
+                    //        breakable.inPit = true;
+                    //        OnDrop(new int2(0, 0));
+                    //        GameManager.Instance.pits[i].EatThings();
+                    //        return;
+                    //    }
+                    //}
+                    if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
                     {
-                        OnDrop(startPosition);
-                        GameManager.Instance.pits[i].EatThings();
-                        return;
+                        Pit pit = GameManager.Instance.pits[i];
+                        if (pit.isEnable)
+                        {
+                            OnDrop(startPosition);
+                            GameManager.Instance.pits[i].EatThings();
+                            return;
+                        }
                     }
 
                 }
