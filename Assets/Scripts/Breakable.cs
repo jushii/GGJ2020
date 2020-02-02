@@ -16,6 +16,7 @@ public class Breakable : MonoBehaviour
     public Transform sprite;
     public SpriteRenderer spriteRenderer;
     [SerializeField] Sprite[] _sprites;
+    [SerializeField] ParticleSystem fxDamaged;
 
     public int2 GridPosition;
     private float _health;
@@ -64,6 +65,12 @@ public class Breakable : MonoBehaviour
             });
         sprite.transform.localPosition = Vector3.zero;
         sprite.transform.DOShakePosition(0.04f, 0.2f, 5);
+
+        if(fxDamaged != null){
+            fxDamaged.Stop();
+            fxDamaged.Play();
+        }
+
     }
 
     public void IncreaseHealth(float amount)
