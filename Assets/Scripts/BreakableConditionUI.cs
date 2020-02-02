@@ -30,7 +30,10 @@ public class BreakableConditionUI : MonoBehaviour
 
     public void Show()
     {
-        canvasGroup.alpha = 1.0f;
+        if (fillImage.fillAmount <= 0.99f)
+        {
+            canvasGroup.alpha = 1.0f;
+        }
     }
 
     public void Hide()
