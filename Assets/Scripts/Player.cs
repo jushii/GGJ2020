@@ -86,6 +86,8 @@ namespace DefaultNamespace
 
         private void Update()
         {
+            if (GameManager.Instance.isGameOver) return;
+            
             if (forceStop) return;
             
             myGridPosition = myCollider.bounds.center.GetGridPosition();
@@ -222,6 +224,8 @@ namespace DefaultNamespace
         
         private void FixedUpdate()
         {
+            if (GameManager.Instance.isGameOver) return;
+
             if (forceStop) return;
 
             if (_isEntity && _entity.isBeingCarried)
