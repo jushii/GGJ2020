@@ -8,7 +8,11 @@ namespace DefaultNamespace
     {
         public int playerNumber;
         public bool isNpc => playerNumber == 0;
+
+        [Header("Particles")] 
+        public ParticleSystem repairEffect;
         
+        [Header("Movement and Physics")]
         [SerializeField] private Rigidbody2D rb;
         public Collider2D myCollider;
         
@@ -262,12 +266,27 @@ namespace DefaultNamespace
                 if (breakable != null && breakable.Health > 0.0f)
                 {
                     foundHit = true;
+                    if (repairEffect != null)
+                    {
+                        int2 gridPosition = breakable.GridPosition;
+                        Vector3 particlePosition = gridPosition.GetWorldPositionWithRandomOffset();
+                        repairEffect.transform.position = particlePosition;
+                        repairEffect.gameObject.SetActive(true);
+                    }
+
                     breakable.IncreaseHealth(0.02f);
                     break;
                 }
 
                 if (revive != null)
                 {
+                    if (repairEffect != null)
+                    {
+                        int2 gridPosition = revive.breakable.GridPosition;
+                        Vector3 particlePosition = gridPosition.GetWorldPositionWithRandomOffset();
+                        repairEffect.transform.position = particlePosition;
+                        repairEffect.gameObject.SetActive(true); 
+                    }
                     revive.ReviveParent();
                     break;
                 }

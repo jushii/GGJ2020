@@ -6,6 +6,8 @@ public class Revive : MonoBehaviour
 {
     [SerializeField] private Breakable _breakable;
 
+    public Breakable breakable => _breakable;
+    
     public void ReviveParent()
     {
         _breakable.ReviveThis();

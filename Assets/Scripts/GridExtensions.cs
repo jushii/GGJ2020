@@ -14,6 +14,19 @@
             );
         }
 
+        public static Vector3 GetWorldPositionWithRandomOffset(this int2 gridPosition)
+        {
+            var position = new Vector3(
+                (gridPosition.x + 1) * GameConfig.TileWidth - GameConfig.TileWidth / 2, 
+                (gridPosition.y + 1) * GameConfig.TileWidth - GameConfig.TileWidth / 2,
+                0.0f
+            );
+
+            position += new Vector3(UnityEngine.Random.Range(-0.25f, 0.25f), UnityEngine.Random.Range(-0.25f, 0.25f), 0.0f);
+
+            return position;
+        }
+
         public static int2 GetGridPosition(this Vector3 worldPosition)
         {
             int x = Mathf.FloorToInt(worldPosition.x);
