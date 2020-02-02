@@ -26,11 +26,12 @@ namespace DefaultNamespace
 
         private bool inRepairState = false;
         private float stateRepairTimer = 60.0f;
-        private float repairTimeLimit = 60.0f;
         
         private bool inDefenceState = false;
         private float stateDefenceTimer = 300.0f;
-        private float defenceTimeLimit = 300.0f;
+
+        public int currentNpcCount;
+        public bool hasGameEnded = false;
         
         private void Awake()
         {
@@ -61,26 +62,23 @@ namespace DefaultNamespace
             {
                 breakable.startHealth = UnityEngine.Random.Range(0.0f, 0.4f);   
             }
-            // Debug.Log("total breakables: " + breakables.Count);
         }
 
         private void Start()
         {
-            StartCoroutine(gameplayUi.StartStateRepair("1:00", StartRepairState));
+            StartCoroutine(gameplayUi.StartStateRepair(GetFormattedTime(GameConfig.RepairStateTimeLimit), StartRepairState));
         }
 
         public void StartRepairState()
         {
-            Debug.Log("start repair state");
-            stateRepairTimer = repairTimeLimit;
+            stateRepairTimer = GameConfig.RepairStateTimeLimit;
             inRepairState = true;
         }
 
         public void StartDefenceState()
         {
-            Debug.Log("start defence state");
             StartCoroutine(spawnController.StartSpawning());
-            stateDefenceTimer = defenceTimeLimit;
+            stateDefenceTimer = GameConfig.DefenceStateTimeLimit;
             inDefenceState = true;
             
         }
@@ -98,19 +96,19 @@ namespace DefaultNamespace
 
                 if (stateRepairTimer <= 0.0f)
                 {
-                    StartCoroutine(gameplayUi.StartStateDefense("5:00", StartDefenceState));
+                    StartCoroutine(gameplayUi.StartStateDefense(GetFormattedTime(GameConfig.DefenceStateTimeLimit), StartDefenceState));
 
                     inRepairState = false;
                     return;
                 }
                 
-                gameplayUi.UpdateProgress(GetFormattedTime(stateRepairTimer), stateRepairTimer / repairTimeLimit);
+                gameplayUi.UpdateProgress(GetFormattedTime(stateRepairTimer), stateRepairTimer / GameConfig.RepairStateTimeLimit);
             }
 
             if (inDefenceState)
             {
                 stateDefenceTimer -= Time.deltaTime;
-                gameplayUi.UpdateProgress(GetFormattedTime(stateDefenceTimer), stateDefenceTimer / defenceTimeLimit);
+                gameplayUi.UpdateProgress(GetFormattedTime(stateDefenceTimer), stateDefenceTimer / GameConfig.DefenceStateTimeLimit);
             }
         }
 

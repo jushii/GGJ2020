@@ -9,24 +9,20 @@ namespace DefaultNamespace
     {
         [SerializeField] private GameObject villagerPrefab;
         public SpawnPoint[] spawnPoints;
-
-        private WaitForSeconds spawnWaitTime = new WaitForSeconds(1);
-
-        private void Start()
-        {
-            StartCoroutine(StartSpawning());
-        }
+        
+        private WaitForSeconds spawnWaitTime = new WaitForSeconds(GameConfig.NPCSpawnInterval);
 
         public IEnumerator StartSpawning()
         {
-
-            yield return new WaitForSeconds(1);
-            
-            while (true)
+            while (!GameManager.Instance.hasGameEnded)
             {
-                SpawnPoint spawnPoint = GetRandomSpawnPoint();
-                Vector3 spawnPos = spawnPoint.GridPosition.GetWorldPosition();
-                Instantiate(villagerPrefab, spawnPos, quaternion.identity, null);
+                if (GameManager.Instance.currentNpcCount < GameConfig.MaxNPCCount)
+                {
+                    SpawnPoint spawnPoint = GetRandomSpawnPoint();
+                    Vector3 spawnPos = spawnPoint.GridPosition.GetWorldPosition();
+                    Instantiate(villagerPrefab, spawnPos, quaternion.identity, null);
+                }
+        
                 yield return spawnWaitTime;
             }
         }
@@ -35,7 +31,5 @@ namespace DefaultNamespace
         {
             return spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
         }
-
-        
     }
 }

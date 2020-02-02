@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 6423782304757266525}
   - component: {fileID: 6423782304757266850}
   - component: {fileID: 6423782304757266851}
-  - component: {fileID: 1392124416}
+  - component: {fileID: 417225511}
   m_Layer: 8
   m_Name: Furniture
   m_TagString: Untagged
@@ -172,6 +172,7 @@ MonoBehaviour:
   normalMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   outlineMaterial: {fileID: 2100000, guid: f7cfb8b82b7044802b656cb356f2a075, type: 2}
   outline: {fileID: 6423782304136227594}
+  animator: {fileID: 0}
   isPickup: 1
   isBreakable: 0
   isGoal: 0
@@ -179,9 +180,11 @@ MonoBehaviour:
     x: 0
     y: 0
   isBeingCarried: 0
+  pickupTriggerName: 
+  dropTriggerName: 
   isCarryingGoal: 0
   breakable: {fileID: 0}
---- !u!114 &1392124416
+--- !u!114 &417225511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,12 +196,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
+  entity: {fileID: 6423782304757266851}
   myCollider: {fileID: 6423782304757266850}
   uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
     type: 3}
+  amplify_damage_taken: 1
+  reviveCollider: {fileID: 0}
   sprite: {fileID: 6423782304136227595}
   spriteRenderer: {fileID: 6423782304136227589}
+  _sprites: []
   GridPosition:
     x: 0
     y: 0

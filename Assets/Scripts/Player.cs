@@ -250,7 +250,7 @@ namespace DefaultNamespace
             
             bool foundHit = false;
 
-            int colliderHitCount = Physics2D.OverlapCircleNonAlloc(myCollider.bounds.center, 1.2f, _hitResults);
+            int colliderHitCount = Physics2D.OverlapCircleNonAlloc(myCollider.bounds.center, 0.75f, _hitResults);
             float neareastSqrDst = float.MaxValue;
             Entity interactionCandidate = null;
         
