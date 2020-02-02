@@ -48,7 +48,7 @@ namespace DefaultNamespace
                     npc.forceStop = true;
                 }
 
-                GameManager.Instance.goalObject.gameObject.SetActive(false);
+                // GameManager.Instance.goalObject.gameObject.SetActive(false);
                 _gameOverFinished = true;
             }
         }
