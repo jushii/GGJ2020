@@ -21,6 +21,7 @@ namespace DefaultNamespace
                     SpawnPoint spawnPoint = GetRandomSpawnPoint();
                     Vector3 spawnPos = spawnPoint.GridPosition.GetWorldPosition();
                     Instantiate(villagerPrefab, spawnPos, quaternion.identity, null);
+                    GameManager.Instance.currentNpcCount++;
                 }
         
                 yield return spawnWaitTime;
