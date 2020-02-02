@@ -172,10 +172,10 @@ namespace DefaultNamespace
             myPosition = dropPosition;
             // GameManager.Instance.level.MakeUnwalkable(dropPosition);
 
-            // if (_player == null)
-            // {
-            //     _updateUnwalkable = true;
-            // }
+            if (_player == null)
+            {
+                _updateUnwalkable = true;
+            }
 
             if (animator != null)
             {
