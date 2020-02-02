@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8955,6 +8955,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: window (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4829224489820799795, guid: 86823836ac5eef3499c0baea5eca6bd2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86823836ac5eef3499c0baea5eca6bd2, type: 3}
 --- !u!1001 &536669278
@@ -16111,6 +16116,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: window (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4829224489820799795, guid: 86823836ac5eef3499c0baea5eca6bd2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86823836ac5eef3499c0baea5eca6bd2, type: 3}
 --- !u!1001 &940952557
@@ -16960,6 +16970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: window (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4829224489820799795, guid: 86823836ac5eef3499c0baea5eca6bd2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86823836ac5eef3499c0baea5eca6bd2, type: 3}
@@ -18192,6 +18207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: window (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4829224489820799795, guid: 86823836ac5eef3499c0baea5eca6bd2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86823836ac5eef3499c0baea5eca6bd2, type: 3}
@@ -30974,6 +30994,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: window (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4829224489820799795, guid: 86823836ac5eef3499c0baea5eca6bd2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86823836ac5eef3499c0baea5eca6bd2, type: 3}
 --- !u!1001 &1758205447
@@ -37368,6 +37393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: window
+      objectReference: {fileID: 0}
+    - target: {fileID: 4829224489820799795, guid: 86823836ac5eef3499c0baea5eca6bd2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86823836ac5eef3499c0baea5eca6bd2, type: 3}
