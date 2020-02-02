@@ -12,6 +12,10 @@ public class Pit : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite closePit;
     [SerializeField] Sprite openPit;
+    [SerializeField] Animator animator;
+
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip suckSfx;
 
     int itemInside = 0;
     int pitCap = 2;
@@ -36,6 +40,9 @@ public class Pit : MonoBehaviour
     public void EatThings()
     {
         Debug.Log("EatThings");
+        animator.SetTrigger("suck");
+        if(audioSource!=null|| suckSfx !=null) audioSource.PlayOneShot(suckSfx);
+        
         itemInside++;
         if (itemInside  >= pitCap)
         {

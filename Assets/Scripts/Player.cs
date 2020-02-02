@@ -44,6 +44,9 @@ namespace DefaultNamespace
         public bool isFlip = false;
         public Transform carryPosition;
 
+        [Header("Sound Effect")]
+        [SerializeField] AudioSource audioSource;
+        [SerializeField] AudioClip repairSfx;
 
         private void Start()
         {
@@ -320,6 +323,10 @@ namespace DefaultNamespace
                 
                 if (breakable != null && breakable.Health > 0.0f && breakable.Health < 1.0f)
                 {
+                    //Repair sound
+
+                    if (audioSource != null && repairSfx != null) audioSource.PlayOneShot(repairSfx);
+
                     foundHit = true;
                     if (repairEffect != null)
                     {
