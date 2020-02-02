@@ -865,8 +865,8 @@ MonoBehaviour:
   annouce_in_clip: {fileID: 7400000, guid: fc708afc83ec38a4db49ad6daafc7f04, type: 2}
   annouce_out_clip: {fileID: 7400000, guid: a5d698a4a90b0fa44a0d00f252d9105a, type: 2}
   annouce_txt: {fileID: 6587933382441265393}
-  defese_word: Survive the day
-  repair_word: Repair your base
+  defese_word: Protect your bride
+  repair_word: Repair!
 --- !u!1 &2316499477716735875
 GameObject:
   m_ObjectHideFlags: 0
