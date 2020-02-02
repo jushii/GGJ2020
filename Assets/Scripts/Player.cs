@@ -95,6 +95,12 @@ namespace DefaultNamespace
                         Repair();
                     }
                 }
+
+                if (playerInput.IsButtonUp(PlayerInput.Button.X))
+                {
+                    SetPlayerAnimation(PlayerAnimation.None);
+                }
+
                 if (playerInput.IsButtonDown(PlayerInput.Button.A))
                 {
                     if (!_isCarryingSomething)
@@ -120,30 +126,31 @@ namespace DefaultNamespace
         {
             switch (playerAnimation)
             {
-                // case PlayerAnimation.Idle:
-                // {
-                //     if (_playerAnimation == playerAnimation) return;
-                //     _playerAnimation = playerAnimation;
-                //     _animator.SetTrigger("idle");
-                //     return;
-                // }
-                // case PlayerAnimation.Run:
-                // {
-                //     if (_playerAnimation == playerAnimation) return;
-                //     _playerAnimation = playerAnimation;
-                //     _animator.SetTrigger("run");
-                //     return;
-                // }
-                // case PlayerAnimation.GrabRun:
-                // {
-                //     if (_playerAnimation == playerAnimation) return;
-                //     _playerAnimation = playerAnimation;
-                //     _animator.SetTrigger("grab_run");
-                //     return;
-                // }
+                case PlayerAnimation.Idle:
+                    {
+                        if (_playerAnimation == playerAnimation || _playerAnimation == PlayerAnimation.Fix) return;
+                        _playerAnimation = playerAnimation;
+                        animator.SetTrigger("idle");
+                        return;
+                    }
+                case PlayerAnimation.Run:
+                    {
+                        if (_playerAnimation == playerAnimation || _playerAnimation == PlayerAnimation.Fix) return;
+                        _playerAnimation = playerAnimation;
+                        animator.SetTrigger("run");
+                        return;
+                    }
+                case PlayerAnimation.GrabRun:
+                    {
+                        if (_playerAnimation == playerAnimation) return;
+                        _playerAnimation = playerAnimation;
+                        animator.SetTrigger("grab_run");
+                        return;
+                    }
                 case PlayerAnimation.Fix:
                 {
-                    _playerAnimation = playerAnimation;
+                        if (_playerAnimation == playerAnimation) return;
+                        _playerAnimation = playerAnimation;
                     animator.SetTrigger("fix");
                     return;
                 }
@@ -160,6 +167,13 @@ namespace DefaultNamespace
                     _playerAnimation = playerAnimation;
                     animator.SetTrigger("throw");
                     return;
+                }
+                case PlayerAnimation.None:
+                {
+                        //if (_playerAnimation == playerAnimation) return;
+                        _playerAnimation = playerAnimation;
+                        //animator.SetTrigger("idle");
+                        return;
                 }
             }
         }
@@ -194,6 +208,12 @@ namespace DefaultNamespace
                 _previousMovement = _movement;
             }
 
+            if(_movement.magnitude>0) SetPlayerAnimation(PlayerAnimation.Run);
+            else
+            {
+                SetPlayerAnimation(PlayerAnimation.Idle);
+            }
+           
             rb.MovePosition(rb.position + _movement * moveSpeed * Time.fixedDeltaTime);
         }
 
@@ -479,7 +499,9 @@ namespace DefaultNamespace
             GrabRun = 2,
             Fix = 3,
             Throw = 4,
-            Grab = 5
+            Grab = 5,
+            None = 6
+           
         }
     }
 }

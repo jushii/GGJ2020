@@ -44,6 +44,19 @@ public class PlayerInput : MonoBehaviour
         return false;
     }
 
+    public bool IsButtonUp(Button button)
+    {
+        switch (button)
+        {
+            case Button.A: return Input.GetButtonUp(_aButton);
+            case Button.B: return Input.GetButtonUp(_bButton);
+            case Button.X: return Input.GetButtonUp(_xButton);
+            case Button.Y: return Input.GetButtonUp(_yButton);
+        }
+
+        return false;
+    }
+
     private void SetControllerNumber(int number)
     {
         if (number == 0) return;
