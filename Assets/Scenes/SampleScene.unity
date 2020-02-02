@@ -5472,22 +5472,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 755266399, guid: d2043bf94c0dce94e9aff5bd8326b7cd, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 755266399, guid: d2043bf94c0dce94e9aff5bd8326b7cd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 755266400, guid: d2043bf94c0dce94e9aff5bd8326b7cd, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4294243583
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215235203, guid: d2043bf94c0dce94e9aff5bd8326b7cd, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4294243583
-      objectReference: {fileID: 0}
     - target: {fileID: 2316499477461073372, guid: d2043bf94c0dce94e9aff5bd8326b7cd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5547,11 +5531,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameplayUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6587933382879150421, guid: d2043bf94c0dce94e9aff5bd8326b7cd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2043bf94c0dce94e9aff5bd8326b7cd, type: 3}
