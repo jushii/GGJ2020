@@ -94,6 +94,7 @@ namespace DefaultNamespace
         public void GameOver()
         {
             isGameOver = true;
+            goalObject.gameObject.SetActive(false);
         }
 
         public void PlayMusic(AudioClip audioClip)
