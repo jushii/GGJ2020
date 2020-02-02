@@ -45,9 +45,9 @@ namespace DefaultNamespace
             if (!_canMove) return;
 
             if (_nextPathPositionIndex == -1 || _nextPathPositionIndex >= _pathfinderResult.Path.Count) return;
-            
-            Vector3 myWorldPos = _player.myGridPosition.GetWorldPosition() + (Vector3.up * (Mathf.Abs(_player.myCollider.offset.y)));
-            Vector3 nextWaypointPos = _pathfinderResult.Path[_nextPathPositionIndex].GridPosition.GetWorldPosition() + (Vector3.up * (Mathf.Abs(_player.myCollider.offset.y)));
+
+            Vector3 myWorldPos = _player.myGridPosition.GetWorldPosition();
+            Vector3 nextWaypointPos = _pathfinderResult.Path[_nextPathPositionIndex].GridPosition.GetWorldPosition();
             
             float dst = Vector3.Distance(myWorldPos, nextWaypointPos);
             if (dst <= 0.01f)
