@@ -49,6 +49,8 @@ namespace DefaultNamespace
         [SerializeField] AudioClip repairSfx;
 
         public bool forceStop;
+
+        public bool isCarryingGoal;
         
         private void Start()
         {
