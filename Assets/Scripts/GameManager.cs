@@ -95,6 +95,14 @@ namespace DefaultNamespace
         {
             isGameOver = true;
             goalObject.gameObject.SetActive(false);
+            StartCoroutine(gameplayUi.GameOver());
+        }
+
+
+        public void Win()
+        {
+            isGameOver = true;
+            StartCoroutine(gameplayUi.Win());
         }
 
         public void PlayMusic(AudioClip audioClip)
@@ -140,7 +148,17 @@ namespace DefaultNamespace
                 SceneManager.LoadScene("SampleScene");
                 return;
             }
-            
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                GameOver();
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                Win();
+                return;
+            }
+
             if (isGameOver) return;
             
             for (int i = 0; i < stateMachines.Count; i++)
@@ -167,8 +185,11 @@ namespace DefaultNamespace
             {
                 stateDefenceTimer -= Time.deltaTime;
                 gameplayUi.UpdateProgress(GetFormattedTime(stateDefenceTimer), stateDefenceTimer / GameConfig.DefenceStateTimeLimit);
+
+                if (stateDefenceTimer <= 0) Win();
             }
         }
+
 
         private string GetFormattedTime(float timer)
         {
