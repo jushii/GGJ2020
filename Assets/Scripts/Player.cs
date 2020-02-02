@@ -62,7 +62,7 @@ namespace DefaultNamespace
                 stateMachine = new StateMachine();
                 stateMachine.AddState(new SpawnState(stateMachine, this));
                 stateMachine.AddState(new MoveToGoalState(stateMachine, this));
-                stateMachine.AddState(new GettingCarriedState(stateMachine, this));
+                stateMachine.AddState(new StunState(stateMachine, this));
                 stateMachine.AddState(new DroppedState(stateMachine, this));
                 stateMachine.AddState(new StealState(stateMachine, this));
                 stateMachine.AddState(new BreakStuffState(stateMachine, this));

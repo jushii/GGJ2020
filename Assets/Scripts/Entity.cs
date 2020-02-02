@@ -140,7 +140,7 @@ namespace DefaultNamespace
                     isCarryingGoal = false;
                 }
                 
-                _player.stateMachine.ChangeState(typeof(GettingCarriedState));
+                _player.stateMachine.ChangeState(typeof(StunState));
             }
         }
 
@@ -231,13 +231,13 @@ namespace DefaultNamespace
         {
             int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
             myPosition = gridPosition;
-            
-            //if (isBeingCarried)
-            //{
-            //    Vector3 carryPosition = _carrierCollider.bounds.center + Vector3.up * _carryOffsetY;
-            //    carryPosition.z = 0.0f;
-            //    transform.position = carryPosition;
-            //}
+
+            if (isBeingCarried)
+            {
+                Vector3 carryPosition = _carrierCollider.bounds.center + Vector3.up * _carryOffsetY;
+                carryPosition.z = 0.0f;
+                transform.position = carryPosition;
+            }
         }
     }
 }
