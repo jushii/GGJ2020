@@ -214,7 +214,8 @@ MonoBehaviour:
   isFlip: 0
   carryPosition: {fileID: 1447554109082924633}
   audioSource: {fileID: 4515931216098240006}
-  repairSfx: {fileID: 8300000, guid: 959514f1212135b4a91958a136654f9d, type: 3}
+  repairSfx: {fileID: 8300000, guid: a910f55fd6ea0354fb815d7e4ea25a2a, type: 3}
+  forceStop: 0
 --- !u!58 &998261271
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -243,7 +244,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.68
   m_Pitch: 1
   Loop: 0
   Mute: 0
