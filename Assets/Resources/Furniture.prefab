@@ -182,6 +182,7 @@ MonoBehaviour:
   isBeingCarried: 0
   pickupTriggerName: 
   dropTriggerName: 
+  isBeingThrowed: 0
   isCarryingGoal: 0
   breakable: {fileID: 0}
 --- !u!114 &417225511
@@ -204,7 +205,10 @@ MonoBehaviour:
   reviveCollider: {fileID: 0}
   sprite: {fileID: 6423782304136227595}
   spriteRenderer: {fileID: 6423782304136227589}
-  _sprites: []
+  _sprites:
+  - {fileID: 21300000, guid: 5c505da51235ea84689e0eedca712c5b, type: 3}
+  - {fileID: 21300000, guid: 0edaf99e9e115414d8232427d2801ec1, type: 3}
+  fxDamaged: {fileID: 0}
   GridPosition:
     x: 0
     y: 0
