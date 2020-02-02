@@ -327,7 +327,7 @@ namespace DefaultNamespace
                 if (_player != null && _player.isCarryingGoal)
                 {
                     Tile tile = GameManager.Instance.level.GetTile(_player.myGridPosition);
-                    if (tile.IsOutside)
+                    if (tile.IsExitZone)
                     {
                         GameManager.Instance.GameOver();
                         return;

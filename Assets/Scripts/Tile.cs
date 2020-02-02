@@ -8,5 +8,6 @@ namespace DefaultNamespace
         public bool IsBlocked;
         public bool IsLight;
         public bool IsOutside;
+        public bool IsExitZone;
     }
 }

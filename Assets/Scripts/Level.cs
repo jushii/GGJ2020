@@ -34,6 +34,14 @@ namespace DefaultNamespace
             return (position.y * GameConfig.GridSizeX) + position.x;
         }
         
+        public void MarkAsExit(int2 gridPosition)
+        {
+            int index = GetIndex(gridPosition);
+            Tile tile = GetTile(gridPosition);
+            tile.IsExitZone = true;
+            grid[index] = tile;
+        }
+        
         public void UpdateOutsideStatus(int2 gridPosition, bool isOutside)
         {
             int index = GetIndex(gridPosition);
