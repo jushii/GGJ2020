@@ -42199,7 +42199,7 @@ PrefabInstance:
         type: 3}
       propertyPath: villagerPrefab
       value: 
-      objectReference: {fileID: 986119875772964506, guid: 6d00f2d06dbee6047bb402200f62d67a,
+      objectReference: {fileID: 986119875772964485, guid: 6d00f2d06dbee6047bb402200f62d67a,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 889add97909084347a7d816369213043, type: 3}

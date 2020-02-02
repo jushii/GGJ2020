@@ -32,7 +32,11 @@ public class Breakable : MonoBehaviour
 
     public bool isWindow;
     public List<GameObject> windowTiles;
-    
+
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip brakingSfx;
+
     private void Start()
     {
         if (isWindow)
@@ -74,6 +78,7 @@ public class Breakable : MonoBehaviour
 
     public void ReduceHealth(float amount)
     {
+        Debug.Log("Reduce hp");
         float currentHealth = _health;
         float nextHealth = Mathf.Clamp(currentHealth - (amount* amplify_damage_taken), 0, 1.0f);
         SetHealth(nextHealth);
@@ -91,6 +96,8 @@ public class Breakable : MonoBehaviour
             fxDamaged.Play();
         }
 
+        if (audioSource != null && brakingSfx != null) audioSource.PlayOneShot(brakingSfx);
+
     }
 
     public void IncreaseHealth(float amount)
@@ -105,7 +112,7 @@ public class Breakable : MonoBehaviour
         //     spriteRenderer.color = originalColor;
         // });
         sprite.transform.localPosition = Vector3.zero;
-        sprite.transform.DOShakePosition(0.04f, 0.1f, 5);
+        sprite.transform.DOShakePosition(0.1f, 0.2f, 5);
     }
 
     public void SetHealth(float hp)

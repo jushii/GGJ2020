@@ -65,6 +65,8 @@ namespace DefaultNamespace
                     _nextPathPositionIndex = -1;
                     _canMove = false;
                     // GrabTheGoal();
+                    // Debug.Log("GAME OVER, BRIDE STOLEN!");
+                    // GameManager.Instance.GameOver();
                 }
                 return;
             }
