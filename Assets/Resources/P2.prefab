@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1545206301}
   - component: {fileID: 7733900719717673881}
   - component: {fileID: 7733900720632015233}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: P2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 2
+  repairEffect: {fileID: 0}
   rb: {fileID: 1545206303}
   myCollider: {fileID: 7733900720632015233}
   playerInput: {fileID: -7500733900145507359}
