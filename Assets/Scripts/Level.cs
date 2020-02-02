@@ -49,6 +49,22 @@ namespace DefaultNamespace
             grid[index] = tile;
         }
         
+        public void MakeLight(int2 gridPosition)
+        {
+            int index = GetIndex(gridPosition);
+            Tile tile = GetTile(gridPosition);
+            tile.IsLight = true;
+            grid[index] = tile;
+        }
+
+        public void RemoveLight(int2 gridPosition)
+        {
+            int index = GetIndex(gridPosition);
+            Tile tile = GetTile(gridPosition);
+            tile.IsLight = false;
+            grid[index] = tile;
+        }
+        
         public int2 GetPosition(int index)
         {
             int x = index % GameConfig.GridSizeX;
