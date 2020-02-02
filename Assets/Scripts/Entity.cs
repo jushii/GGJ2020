@@ -164,7 +164,7 @@ namespace DefaultNamespace
             if (_carrierCollider != null)
             {
                 Player player = _carrierCollider.transform.GetComponent<Player>();
-                player.myCollider.isTrigger = true;
+                // player.myCollider.isTrigger = true;
                 player.OnDrop();
                 GameManager.Instance.isPlayerCarryingTheGoal = false;
 
@@ -257,7 +257,7 @@ namespace DefaultNamespace
 
             if (_player != null)
             {
-                _player.myCollider.isTrigger = false;
+                // _player.myCollider.isTrigger = false;
                 for (int i = 0; i < GameManager.Instance.pitPositions.Count; i++)
                 {
                     if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
