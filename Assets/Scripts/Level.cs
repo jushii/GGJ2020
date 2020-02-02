@@ -13,6 +13,7 @@ namespace DefaultNamespace
             {
                 grid[i].GridPosition = new int2(GetPosition(i));
                 grid[i].IsBlocked = false;
+                grid[i].IsOutside = true;
             }
         }
         
@@ -33,6 +34,14 @@ namespace DefaultNamespace
             return (position.y * GameConfig.GridSizeX) + position.x;
         }
         
+        public void UpdateOutsideStatus(int2 gridPosition, bool isOutside)
+        {
+            int index = GetIndex(gridPosition);
+            Tile tile = GetTile(gridPosition);
+            tile.IsOutside = isOutside;
+            grid[index] = tile;
+        }
+        
         public void MakeUnwalkable(int2 gridPosition)
         {
             int index = GetIndex(gridPosition);
@@ -46,6 +55,22 @@ namespace DefaultNamespace
             int index = GetIndex(gridPosition);
             Tile tile = GetTile(gridPosition);
             tile.IsBlocked = false;
+            grid[index] = tile;
+        }
+        
+        public void MakeLight(int2 gridPosition)
+        {
+            int index = GetIndex(gridPosition);
+            Tile tile = GetTile(gridPosition);
+            tile.IsLight = true;
+            grid[index] = tile;
+        }
+
+        public void RemoveLight(int2 gridPosition)
+        {
+            int index = GetIndex(gridPosition);
+            Tile tile = GetTile(gridPosition);
+            tile.IsLight = false;
             grid[index] = tile;
         }
         

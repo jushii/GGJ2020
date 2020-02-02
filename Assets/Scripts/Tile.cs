@@ -6,5 +6,7 @@ namespace DefaultNamespace
     {
         public int2 GridPosition;
         public bool IsBlocked;
+        public bool IsLight;
+        public bool IsOutside;
     }
 }

@@ -9,6 +9,7 @@ namespace DefaultNamespace
         {
             int2 myGridPosition = transform.position.GetGridPosition();
             GameManager.Instance.level.MakeUnwalkable(myGridPosition);
+            GameManager.Instance.level.UpdateOutsideStatus(myGridPosition, false);
             transform.position = myGridPosition.GetWorldPosition();
         }
     }

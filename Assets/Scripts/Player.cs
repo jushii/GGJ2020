@@ -124,6 +124,31 @@ namespace DefaultNamespace
                     }
                 }
             }
+
+            if (!isNpc)
+            {
+                Tile tile = GameManager.Instance.level.GetTile(myGridPosition);
+                if (tile.IsLight)
+                {
+                    moveSpeed = 2.5f;
+                }
+                else
+                {
+                    moveSpeed = 5.0f;
+                }
+            }
+            else
+            {
+                Tile tile = GameManager.Instance.level.GetTile(myGridPosition);
+                if (tile.IsOutside)
+                {
+                    _spriteRenderer.enabled = false;
+                }
+                else
+                {
+                    _spriteRenderer.enabled = true;
+                }
+            }
         }
 
         public void SetPlayerAnimation(PlayerAnimation playerAnimation)
@@ -528,7 +553,6 @@ namespace DefaultNamespace
             Throw = 4,
             Grab = 5,
             None = 6
-           
         }
     }
 }
