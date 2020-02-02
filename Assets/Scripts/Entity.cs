@@ -52,7 +52,7 @@ namespace DefaultNamespace
         
         private void Start()
         {
-            _player = GetComponentInParent<Player>();
+            _player = GetComponent<Player>();
             _myCollider = GetComponent<Collider2D>();
             int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
             startPosition = gridPosition;
@@ -157,6 +157,9 @@ namespace DefaultNamespace
         public void OnSteal(Collider2D stealer)
         {
             GameManager.Instance.isNpcCarryingTheGoal = true;
+
+            var stealerPlayer = stealer.GetComponent<Player>();
+            stealerPlayer.isCarryingGoal = true;
             
             if (_carrierCollider != null)
             {
@@ -272,6 +275,7 @@ namespace DefaultNamespace
             if (_player != null && _player.isNpc)
             {
                 GameManager.Instance.isNpcCarryingTheGoal = false;
+                _player.isCarryingGoal = false;
                 _player.stateMachine.ChangeState(typeof(DroppedState));
             }
         }
@@ -320,9 +324,9 @@ namespace DefaultNamespace
             
             if (!GameManager.Instance.isGameOver)
             {
-                if (isGoal)
+                if (_player != null && _player.isCarryingGoal)
                 {
-                    Tile tile = GameManager.Instance.level.GetTile(_myCollider.bounds.center.GetGridPosition());
+                    Tile tile = GameManager.Instance.level.GetTile(_player.myGridPosition);
                     if (tile.IsOutside)
                     {
                         GameManager.Instance.GameOver();
