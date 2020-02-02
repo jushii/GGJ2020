@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DefaultNamespace;
 using Unity.Mathematics;
 using UnityEngine;
@@ -28,9 +29,17 @@ public class Breakable : MonoBehaviour
     public float Health => _health;
     private Entity _entity;
     internal bool inPit = false;
+
+    public bool isWindow;
+    public List<GameObject> windowTiles;
     
     private void Start()
     {
+        if (isWindow)
+        {
+            EnableLight(false);
+        }
+        
         GridPosition = transform.position.GetGridPosition();
         GameManager.Instance.level.MakeUnwalkable(GridPosition);
         transform.position = GridPosition.GetWorldPosition();
@@ -42,6 +51,14 @@ public class Breakable : MonoBehaviour
 
         conditionUi.transform.localScale = Vector3.one;
         conditionUi.Initialize(this);
+    }
+
+    public void EnableLight(bool isEnabled)
+    {
+        foreach (var window in windowTiles)
+        {
+            window.SetActive(isEnabled);
+        }
     }
 
     public bool CanTarget()
@@ -131,6 +148,11 @@ public class Breakable : MonoBehaviour
         {
             reviveCollider.SetActive(true);
         }
+
+        if (isWindow)
+        {
+            EnableLight(true);
+        }
     }
 
     public void ReviveThis()
@@ -146,6 +168,11 @@ public class Breakable : MonoBehaviour
         spriteRenderer.enabled = true;
         int2 gridPosition = transform.position.GetGridPosition();
         GameManager.Instance.level.MakeUnwalkable(gridPosition);
+        
+        if (isWindow)
+        {
+            EnableLight(false);
+        }
     }
 
     private void Update()

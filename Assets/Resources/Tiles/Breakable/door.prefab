@@ -91,6 +91,8 @@ MonoBehaviour:
     x: 0
     y: 0
   conditionUi: {fileID: 0}
+  isWindow: 1
+  windowTiles: []
 --- !u!1 &4438550362866755352
 GameObject:
   m_ObjectHideFlags: 0
