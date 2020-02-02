@@ -187,7 +187,8 @@ MonoBehaviour:
   isFlip: 0
   carryPosition: {fileID: 759747226849435998}
   audioSource: {fileID: 713513738254300173}
-  repairSfx: {fileID: 8300000, guid: 959514f1212135b4a91958a136654f9d, type: 3}
+  repairSfx: {fileID: 8300000, guid: fcfa8792d5f71bb489277fe227ffb8f2, type: 3}
+  forceStop: 0
 --- !u!58 &7733900719717673881
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -364,7 +365,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ff35680e090b50c47876a3c46ef0c2ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
