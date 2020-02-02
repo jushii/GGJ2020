@@ -32,7 +32,11 @@ public class Breakable : MonoBehaviour
 
     public bool isWindow;
     public List<GameObject> windowTiles;
-    
+
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip brakingSfx;
+
     private void Start()
     {
         if (isWindow)
@@ -91,6 +95,8 @@ public class Breakable : MonoBehaviour
             fxDamaged.Stop();
             fxDamaged.Play();
         }
+
+        if (audioSource != null && brakingSfx != null) audioSource.PlayOneShot(brakingSfx);
 
     }
 
