@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using DefaultNamespace;
+using UnityEngine.SceneManagement;
 
 public class GameplayUI : MonoBehaviour
 {
@@ -34,7 +35,21 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI annouce_txt;
     [SerializeField] string defese_word;
     [SerializeField] string repair_word;
- 
+
+    [Header("Gameover UI")]
+    [SerializeField] Animator gameover_anim;
+    [SerializeField] AnimationClip gameover_in_clip;
+    [SerializeField] AnimationClip gameover_out_clip;
+    [SerializeField] TextMeshProUGUI gameover_txt;
+    [SerializeField] string gameover_word;
+
+    [Header("Win UI")]
+    [SerializeField] Animator win_anim;
+    [SerializeField] AnimationClip win_in_clip;
+    [SerializeField] AnimationClip win_out_clip;
+    [SerializeField] TextMeshProUGUI win_txt;
+    [SerializeField] string win_word;
+
     bool isShown_Progress = false;
 
     public IEnumerator StartStateRepair(string timeLimit, Action onComplete = null)
@@ -118,4 +133,67 @@ public class GameplayUI : MonoBehaviour
     {
         StartCoroutine(StartStateDefense("60 Sec", ()=> { Debug.Log("Finish open defense UI"); }));
     }
+
+    bool isWaitForGameover = false;
+    bool isWaitForWin = false;
+
+    public IEnumerator GameOver()
+    {
+        Debug.Log("Gameover");
+        gameover_anim.SetTrigger("open");
+        yield return new WaitForSeconds(gameover_in_clip.length);
+        isWaitForGameover = true;
+        //yield return ProgressBar_Open();
+    }
+
+    public IEnumerator Win()
+    {
+        win_anim.SetTrigger("open");
+        yield return new WaitForSeconds(win_in_clip.length);
+        isWaitForWin = true;
+        //yield return ProgressBar_Open();
+    }
+
+
+
+    public void ExitGameover()
+    {
+        Debug.Log("Exit Gameover");
+         isWaitForGameover = false;
+         isWaitForWin = false;
+        gameover_anim.SetTrigger("start");
+        SceneManager.LoadScene("SampleScene");
+    }
+
+
+    public void ExitWin()
+    {
+        Debug.Log("Exit Win");
+        isWaitForGameover = false;
+         isWaitForWin = false;
+        win_anim.SetTrigger("start");
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Joystick_1_A") || Input.GetButtonDown("Joystick_2_A"))
+        {
+            Debug.Log("press A");
+            if (isWaitForGameover)
+            {
+                Debug.Log("continue from gameover");
+                ExitGameover();
+            }
+            if (isWaitForWin)
+            {
+                Debug.Log("continue from win");
+                ExitWin();
+            }
+
+
+      
+        }
+    }
+
 }
