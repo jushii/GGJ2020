@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -783,6 +783,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -2169,6 +2174,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2318,6 +2328,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -2499,6 +2514,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -3385,6 +3405,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3475,6 +3500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -4041,6 +4071,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -5364,6 +5399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -9804,6 +9844,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13911,6 +13956,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14017,6 +14067,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -14380,6 +14435,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -17080,6 +17140,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17320,6 +17385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -18738,6 +18808,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19492,6 +19567,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -21420,6 +21500,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21776,6 +21861,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -22203,6 +22293,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -22785,6 +22880,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -23046,6 +23146,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -26312,6 +26417,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -28962,6 +29072,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30437,6 +30552,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -32333,6 +32453,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33955,6 +34080,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -35889,6 +36019,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -37004,6 +37139,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -38291,6 +38431,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39310,6 +39455,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile_light_inside (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39384,6 +39534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
@@ -39490,6 +39645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tile_light_inside (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163042321809460570, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163042321809460572, guid: 8f1b90a0df54e5f4091f6f28f7794c72,
         type: 3}
