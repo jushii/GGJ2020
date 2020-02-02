@@ -87,6 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08e0933c56973c498abc39b5d593811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goodColor: {r: 0.13762948, g: 1, b: 0.033018887, a: 0.7490196}
+  badColor: {r: 1, g: 0.14140464, b: 0.031372547, a: 0.7490196}
   canvasGroup: {fileID: 3241403387012557240}
   fillImage: {fileID: 6915343248844559601}
 --- !u!225 &3241403387012557240
