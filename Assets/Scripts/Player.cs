@@ -65,6 +65,7 @@ namespace DefaultNamespace
                 stateMachine.AddState(new StunState(stateMachine, this));
                 stateMachine.AddState(new DroppedState(stateMachine, this));
                 stateMachine.AddState(new StealState(stateMachine, this));
+                stateMachine.AddState(new InPitState(stateMachine, this));
                 stateMachine.AddState(new BreakStuffState(stateMachine, this));
                 GameManager.Instance.AddStateMachine(stateMachine);
                 stateMachine.ChangeState(typeof(SpawnState));

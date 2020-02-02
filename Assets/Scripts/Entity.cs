@@ -229,6 +229,19 @@ namespace DefaultNamespace
             isBeingCarried = false;
             this.transform.SetParent(null);
 
+            if (_player != null)
+            {
+                for (int i = 0; i < GameManager.Instance.pitPositions.Count; i++)
+                {
+                    if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
+                    {
+                        _player.stateMachine.ChangeState(typeof(InPitState));
+                        OnDrop(new int2(0,0));
+                        return;
+                    }
+                }
+            }
+            
             if (_player != null && _player.isNpc)
             {
                 GameManager.Instance.isNpcCarryingTheGoal = false;

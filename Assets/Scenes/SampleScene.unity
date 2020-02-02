@@ -1297,6 +1297,18 @@ Transform:
   m_Father: {fileID: 81779061}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &84285363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 417225511, guid: cd3ad2476b993fb4285aec692c8dd313,
+    type: 3}
+  m_PrefabInstance: {fileID: 998931031}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &91389084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1705,6 +1717,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &108496325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 417225511, guid: cd3ad2476b993fb4285aec692c8dd313,
+    type: 3}
+  m_PrefabInstance: {fileID: 440403302}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &117830302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5944,6 +5968,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Furniture (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6423782304757266851, guid: cd3ad2476b993fb4285aec692c8dd313,
+        type: 3}
+      propertyPath: breakable
+      value: 
+      objectReference: {fileID: 1185789018}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3ad2476b993fb4285aec692c8dd313, type: 3}
 --- !u!1001 &363843866
@@ -6949,6 +6978,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Furniture (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6423782304757266851, guid: cd3ad2476b993fb4285aec692c8dd313,
+        type: 3}
+      propertyPath: breakable
+      value: 
+      objectReference: {fileID: 108496325}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3ad2476b993fb4285aec692c8dd313, type: 3}
 --- !u!1001 &440530193
@@ -12928,6 +12962,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Furniture (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6423782304757266851, guid: cd3ad2476b993fb4285aec692c8dd313,
+        type: 3}
+      propertyPath: breakable
+      value: 
+      objectReference: {fileID: 1815162489}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3ad2476b993fb4285aec692c8dd313, type: 3}
 --- !u!1001 &716157651
@@ -17328,6 +17367,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Furniture (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6423782304757266851, guid: cd3ad2476b993fb4285aec692c8dd313,
+        type: 3}
+      propertyPath: breakable
+      value: 
+      objectReference: {fileID: 1023254992}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3ad2476b993fb4285aec692c8dd313, type: 3}
 --- !u!1001 &998261266
@@ -17476,6 +17520,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Furniture (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6423782304757266851, guid: cd3ad2476b993fb4285aec692c8dd313,
+        type: 3}
+      propertyPath: breakable
+      value: 
+      objectReference: {fileID: 84285363}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3ad2476b993fb4285aec692c8dd313, type: 3}
 --- !u!1 &1003073437
@@ -17915,6 +17964,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1022520097}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1023254992 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 417225511, guid: cd3ad2476b993fb4285aec692c8dd313,
+    type: 3}
+  m_PrefabInstance: {fileID: 995484710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1027826907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20872,6 +20933,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1182970022}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1185789018 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 417225511, guid: cd3ad2476b993fb4285aec692c8dd313,
+    type: 3}
+  m_PrefabInstance: {fileID: 358275621}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1186411741
 GameObject:
   m_ObjectHideFlags: 0
@@ -27091,6 +27164,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Furniture (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6423782304757266851, guid: cd3ad2476b993fb4285aec692c8dd313,
+        type: 3}
+      propertyPath: breakable
+      value: 
+      objectReference: {fileID: 1935335492}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3ad2476b993fb4285aec692c8dd313, type: 3}
 --- !u!1001 &1545639475
@@ -32696,6 +32774,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b76b0776a8bf9f4ab374d5a22f8a376, type: 3}
+--- !u!114 &1815162489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 417225511, guid: cd3ad2476b993fb4285aec692c8dd313,
+    type: 3}
+  m_PrefabInstance: {fileID: 715955170}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1817465730
 GameObject:
   m_ObjectHideFlags: 0
@@ -34662,6 +34752,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1933142809}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1935335492 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 417225511, guid: cd3ad2476b993fb4285aec692c8dd313,
+    type: 3}
+  m_PrefabInstance: {fileID: 1536271882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d44659c65c4a4b900c393229c9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1954009324
 PrefabInstance:
   m_ObjectHideFlags: 0
