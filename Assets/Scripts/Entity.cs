@@ -39,6 +39,7 @@ namespace DefaultNamespace
         [SerializeField] string pickupTriggerName = "";
         [SerializeField] string dropTriggerName = "";
 
+        public bool isBeingThrowed;
 
         private Player _player;
 
@@ -122,6 +123,12 @@ namespace DefaultNamespace
             }
 
             Player player = carrier.GetComponent<Player>();
+
+            if (isGoal && !player.isNpc)
+            {
+                GameManager.Instance.isPlayerCarryingTheGoal = true;
+            }
+                
             this.transform.SetParent(player.carryPosition);
             this.transform.localPosition = new Vector3(0, 0, 0);
             if (player.isFlip) this.transform.localScale = new Vector3(-1, 1, 1);
@@ -136,6 +143,7 @@ namespace DefaultNamespace
             {
                 if (isCarryingGoal)
                 {
+                    GameManager.Instance.isPlayerCarryingTheGoal = false;
                     GameManager.Instance.goalObject.OnDrop(myPosition);
                     isCarryingGoal = false;
                 }
@@ -146,9 +154,18 @@ namespace DefaultNamespace
 
         public void OnSteal(Collider2D stealer)
         {
+            GameManager.Instance.isNpcCarryingTheGoal = true;
+            
             if (_carrierCollider != null)
             {
-                _carrierCollider.transform.GetComponent<Player>().OnDrop();
+                Player player = _carrierCollider.transform.GetComponent<Player>();
+                player.OnDrop();
+                GameManager.Instance.isPlayerCarryingTheGoal = false;
+
+                if (isGoal && !player.isNpc)
+                {
+                    GameManager.Instance.isPlayerCarryingTheGoal = true;
+                }
             }
             
             stealer.GetComponent<Entity>().isCarryingGoal = true;
@@ -157,6 +174,12 @@ namespace DefaultNamespace
         
         public void OnDrop(int2 dropPosition)
         {
+            if (isGoal)
+            {
+                GameManager.Instance.isNpcCarryingTheGoal = false;
+                GameManager.Instance.isPlayerCarryingTheGoal = false;
+            }
+            
             transform.position = dropPosition.GetWorldPosition();
             _carrierCollider = null;
             _myCollider.enabled = true;
@@ -187,12 +210,14 @@ namespace DefaultNamespace
 
             if (_player != null && _player.isNpc)
             {
+                GameManager.Instance.isNpcCarryingTheGoal = false;
                 _player.stateMachine.ChangeState(typeof(DroppedState));
             }
         }
 
         public void OnThrow(int2 throwDestination)
         {
+            isBeingThrowed = true;
             _myThrowDestination = throwDestination;
             this.transform.SetParent(null);
 
@@ -207,6 +232,7 @@ namespace DefaultNamespace
             _throwTween = transform.DOMove(throwWorldDest, 0.25f)
                 .OnComplete(() =>
                 {
+                    isBeingThrowed = false;
                     OnDrop(_myThrowDestination);
                 });
         }
@@ -232,7 +258,7 @@ namespace DefaultNamespace
             int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
             myPosition = gridPosition;
 
-            if (isBeingCarried)
+            if (isBeingCarried && !isBeingThrowed)
             {
                 Vector3 carryPosition = _carrierCollider.bounds.center + Vector3.up * _carryOffsetY;
                 carryPosition.z = 0.0f;
