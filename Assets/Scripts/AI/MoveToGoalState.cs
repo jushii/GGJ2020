@@ -15,11 +15,14 @@ namespace DefaultNamespace
         private PathfinderResult _pathfinderResult;
         private bool _canMove;
         private int _interval = 120;
+
+        private Entity _entity;
         
         public MoveToGoalState(StateMachine stateMachine, Player player)
             : base(stateMachine)
         {
             _player = player;
+            _entity = _player.GetComponent<Entity>();
             _interval = Random.Range(10, 25);
             _player.moveSpeed = 1.5f;
         }
@@ -50,7 +53,7 @@ namespace DefaultNamespace
                 Vector3 a = _player.myCollider.bounds.center;
                 Vector3 b = GameManager.Instance.isPlayerCarryingTheGoal ? GameManager.Instance.goalObject.transform.position + (Vector3.up * -0.65f) : GameManager.Instance.goalObject.transform.position;
                 var distanceToGoal = Vector3.Distance(a, b);
-                if (distanceToGoal < 1.0f)
+                if (distanceToGoal < 1.0f && !_entity.isBeingCarried && !_entity.isBeingThrowed)
                 {
                     GrabTheGoal();
                 }
