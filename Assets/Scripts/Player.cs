@@ -136,8 +136,17 @@ namespace DefaultNamespace
                 case PlayerAnimation.Run:
                     {
                         if (_playerAnimation == playerAnimation || _playerAnimation == PlayerAnimation.Fix) return;
-                        _playerAnimation = playerAnimation;
-                        animator.SetTrigger("run");
+                        if (_isCarryingSomething)
+                        {
+                            SetPlayerAnimation(PlayerAnimation.GrabRun);
+                        }
+                        else
+                        {
+                            _playerAnimation = playerAnimation;
+                            animator.SetTrigger("run");
+                        }
+                        //_playerAnimation = playerAnimation;
+                        //animator.SetTrigger("run");
                         return;
                     }
                 case PlayerAnimation.GrabRun:
@@ -360,6 +369,7 @@ namespace DefaultNamespace
                     // _isCarryingSomething = false;
                 // }
             }
+            SetPlayerAnimation(PlayerAnimation.Run);
         }
 
         public void OnDrop()
@@ -437,6 +447,7 @@ namespace DefaultNamespace
                 }
                 // }
             }
+            SetPlayerAnimation(PlayerAnimation.Run);
         }
         
         private void UpdateInteractables()

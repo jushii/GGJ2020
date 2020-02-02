@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 0
+  repairEffect: {fileID: 0}
   rb: {fileID: 986119875772964487}
   myCollider: {fileID: 986119875772964486}
   playerInput: {fileID: 0}
@@ -290,8 +291,9 @@ MonoBehaviour:
     x: 0
     y: 0
   isBeingCarried: 0
-  pickupTriggerName: 
-  dropTriggerName: 
+  pickupTriggerName: carry
+  dropTriggerName: run
+  isBeingThrowed: 0
   isCarryingGoal: 0
   breakable: {fileID: 0}
 --- !u!1 &9104257150528149592
