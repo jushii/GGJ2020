@@ -352,6 +352,14 @@ namespace DefaultNamespace
                 // if (Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f))
                 // {
                     Tile tile = GameManager.Instance.level.GetTile(_dropPosition);
+
+                if (GameManager.Instance.pitPositions.Contains(_dropPosition))
+                {
+                    int index = GameManager.Instance.pitPositions.IndexOf(_dropPosition);
+                    if (!GameManager.Instance.pits[index].isEnable) return;
+                     Debug.Log("Yes it a pit");
+                }
+
                     if (tile.IsBlocked) return;
                     if (!isNpc)
                     {
