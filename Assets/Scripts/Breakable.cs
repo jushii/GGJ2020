@@ -155,6 +155,11 @@ public class Breakable : MonoBehaviour
         {
             reviveCollider.SetActive(true);
         }
+        else
+        {
+            inPit = true;
+            gameObject.SetActive(false);
+        }
 
         if (isWindow)
         {

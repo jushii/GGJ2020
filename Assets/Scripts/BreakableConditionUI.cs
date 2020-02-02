@@ -42,6 +42,15 @@ public class BreakableConditionUI : MonoBehaviour
     {
         fillImage.color = Color.Lerp(badColor, goodColor, condition / 1.0f);
         fillImage.fillAmount = Mathf.Clamp(condition / 1.0f, 0.0f, 1.0f);
+
+        if (fillImage.fillAmount >= 0.99f)
+        {
+            Hide();
+        }
+        else
+        {
+            Show();
+        }
     }
     
     private void LateUpdate()
