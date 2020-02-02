@@ -78,7 +78,7 @@ MonoBehaviour:
   uiConditionPrefab: {fileID: -2542621513081993394, guid: 9e7dfb57cef5d064ba7f4d1188221ecb,
     type: 3}
   amplify_damage_taken: 2
-  reviveCollider: {fileID: 0}
+  reviveCollider: {fileID: 4829224489820799795}
   sprite: {fileID: 3545502475014768870}
   spriteRenderer: {fileID: 3545502475014768869}
   _sprites:
