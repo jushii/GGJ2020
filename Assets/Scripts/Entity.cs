@@ -129,6 +129,7 @@ namespace DefaultNamespace
             if (isGoal && !player.isNpc)
             {
                 GameManager.Instance.isPlayerCarryingTheGoal = true;
+                GameManager.Instance.spawnController.ClearDropStatus();
             }
                 
             this.transform.SetParent(player.carryPosition);

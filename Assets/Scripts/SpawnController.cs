@@ -32,6 +32,14 @@ namespace DefaultNamespace
             }
         }
 
+        public void ClearDropStatus()
+        {
+            foreach (var npc in npcs)
+            {
+                npc.isCarryingGoal = false;
+            }
+        }
+        
         private SpawnPoint GetRandomSpawnPoint()
         {
             return spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];

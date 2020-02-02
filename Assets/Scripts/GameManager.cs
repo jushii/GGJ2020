@@ -24,7 +24,7 @@ namespace DefaultNamespace
         
         [SerializeField] private GridVisualizer gridVisualizerPrefab;
         [SerializeField] private GameplayUI gameplayUi;
-        [SerializeField] private SpawnController spawnController;
+        public SpawnController spawnController;
         
         public Level level;
 
