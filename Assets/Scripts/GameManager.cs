@@ -11,6 +11,17 @@ namespace DefaultNamespace
     {
         public static GameManager Instance;
         
+        [Header("Game state audio")]
+        public AudioClip repairStateStartSfx;
+        public AudioClip repairStateStartSfx2;
+        public AudioClip defenceStateStartSfx;
+        public AudioClip defenceStateMusic;
+        public AudioClip deferenceStateGameOverSfx;
+        [Header("Game state audio sources")] 
+        public AudioSource musicAudioSource;
+        public AudioSource atmoshpericAudioSource;
+        public AudioSource atmoshpericAudioSource2;
+        
         [SerializeField] private GridVisualizer gridVisualizerPrefab;
         [SerializeField] private GameplayUI gameplayUi;
         [SerializeField] private SpawnController spawnController;
@@ -85,8 +96,30 @@ namespace DefaultNamespace
             isGameOver = true;
         }
 
+        public void PlayMusic(AudioClip audioClip)
+        {
+            musicAudioSource.clip = audioClip;
+            musicAudioSource.loop = true;
+            musicAudioSource.Play();
+        }
+
+        public void PlayAtmospheric(AudioClip audioClip)
+        {
+            atmoshpericAudioSource.clip = audioClip;
+            atmoshpericAudioSource.loop = false;
+            atmoshpericAudioSource.Play();
+        }
+        
+        public void PlayAtmospheric2(AudioClip audioClip)
+        {
+            atmoshpericAudioSource2.clip = audioClip;
+            atmoshpericAudioSource2.loop = false;
+            atmoshpericAudioSource2.Play();
+        }
+        
         public void StartRepairState()
         {
+            PlayMusic(defenceStateMusic);
             stateRepairTimer = GameConfig.RepairStateTimeLimit;
             inRepairState = true;
         }

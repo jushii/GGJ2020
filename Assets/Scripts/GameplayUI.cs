@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using DefaultNamespace;
 
 public class GameplayUI : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class GameplayUI : MonoBehaviour
 
     public IEnumerator StartStateRepair(string timeLimit, Action onComplete = null)
     {
+        // GameManager.Instance.PlayAtmospheric2(GameManager.Instance.repairStateStartSfx2);
         if(isShown_Progress) yield return ProgressBar_Close();
         sun_img.SetActive(false);
         moon_img.SetActive(false);
@@ -95,6 +97,7 @@ public class GameplayUI : MonoBehaviour
 
     public IEnumerator Annouce_Open()
     {
+        GameManager.Instance.PlayAtmospheric(GameManager.Instance.repairStateStartSfx);
         annouce_anim.SetTrigger("open");
         yield return new WaitForSeconds(annouce_in_clip.length);
     }
