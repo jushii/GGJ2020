@@ -27,7 +27,8 @@ public class Breakable : MonoBehaviour
     
     public float Health => _health;
     private Entity _entity;
-
+    internal bool inPit = false;
+    
     private void Start()
     {
         GridPosition = transform.position.GetGridPosition();
@@ -49,6 +50,8 @@ public class Breakable : MonoBehaviour
 
         if (_health <= 0) return false;
 
+        if (inPit) return false;
+        
         return true;
     }
 

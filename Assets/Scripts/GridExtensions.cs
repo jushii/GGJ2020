@@ -1,4 +1,6 @@
-﻿namespace DefaultNamespace
+﻿using Boo.Lang;
+
+namespace DefaultNamespace
 {
     using Unity.Mathematics;
     using UnityEngine;
@@ -38,14 +40,14 @@
             return new int2(x, y);
         }
 
-        // public static bool HasCoordinate(this Node[] grid, int2 coordinate)
-        // {
-        //     for (int i = 0; i < grid.Length; i++)
-        //     {
-        //         if (grid[i].GridPosition.Equals(coordinate)) return true;
-        //     }
-        //
-        //     return false;
-        // }
+        public static bool HasCoordinate(this List<int2> grid, int2 coordinate)
+        {
+            for (int i = 0; i < grid.Count; i++)
+            {
+                if (grid[i].Equals(coordinate)) return true;
+            }
+        
+            return false;
+        }
     }
 }

@@ -35,6 +35,8 @@ namespace DefaultNamespace
 
         public bool isNpcCarryingTheGoal;
         public bool isPlayerCarryingTheGoal;
+
+        public List<int2> pitPositions = new List<int2>();
         
         private void Awake()
         {

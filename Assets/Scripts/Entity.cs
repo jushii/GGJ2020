@@ -48,12 +48,14 @@ namespace DefaultNamespace
 
         public bool isCarryingGoal;
         public Breakable breakable;
+        public int2 startPosition;
         
         private void Start()
         {
             _player = GetComponentInParent<Player>();
             _myCollider = GetComponent<Collider2D>();
             int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
+            startPosition = gridPosition;
             Vector3 gridWorldPosition = gridPosition.GetWorldPosition();
             transform.position = gridWorldPosition;
             myPosition = gridPosition;
@@ -178,6 +180,15 @@ namespace DefaultNamespace
             {
                 GameManager.Instance.isNpcCarryingTheGoal = false;
                 GameManager.Instance.isPlayerCarryingTheGoal = false;
+
+                for (int i = 0; i < GameManager.Instance.pitPositions.Count; i++)
+                {
+                    if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
+                    {
+                        OnDrop(startPosition);
+                        return;
+                    }
+                }
             }
             
             transform.position = dropPosition.GetWorldPosition();
@@ -195,8 +206,18 @@ namespace DefaultNamespace
             myPosition = dropPosition;
             // GameManager.Instance.level.MakeUnwalkable(dropPosition);
 
-            if (_player == null)
+            if (_player == null && !isGoal)
             {
+                for (int i = 0; i < GameManager.Instance.pitPositions.Count; i++)
+                {
+                    if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
+                    {
+                        breakable.inPit = true;
+                        OnDrop(new int2(0,0));
+                        return;
+                    }
+                }
+                
                 _updateUnwalkable = true;
             }
 

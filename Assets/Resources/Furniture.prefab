@@ -184,7 +184,10 @@ MonoBehaviour:
   dropTriggerName: 
   isBeingThrowed: 0
   isCarryingGoal: 0
-  breakable: {fileID: 0}
+  breakable: {fileID: 417225511}
+  startPosition:
+    x: 0
+    y: 0
 --- !u!114 &417225511
 MonoBehaviour:
   m_ObjectHideFlags: 0
