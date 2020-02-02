@@ -37,7 +37,8 @@ namespace DefaultNamespace
         public bool isPlayerCarryingTheGoal;
 
         public List<int2> pitPositions = new List<int2>();
-        
+        public List<Pit> pits = new List<Pit>();
+
         private void Awake()
         {
             if (Instance == null)
@@ -227,6 +228,18 @@ namespace DefaultNamespace
             }
 
             return best;
+        }
+
+        public Pit GetPitFromPitPosition(int2 position)
+        {
+            for(int i = 0; i < pitPositions.Count; i++)
+            {
+                if(position.Equals(pitPositions[i]))
+                {
+                    return pits[i];
+                }
+            }
+            return null;
         }
     }
 }

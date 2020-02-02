@@ -183,11 +183,14 @@ namespace DefaultNamespace
 
                 for (int i = 0; i < GameManager.Instance.pitPositions.Count; i++)
                 {
-                    if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
+                    Pit pit = GameManager.Instance.pits[i];
+                    if (pit.isEnable)
                     {
                         OnDrop(startPosition);
+                        GameManager.Instance.pits[i].EatThings();
                         return;
                     }
+
                 }
             }
             
@@ -212,9 +215,14 @@ namespace DefaultNamespace
                 {
                     if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
                     {
-                        breakable.inPit = true;
-                        OnDrop(new int2(0,0));
-                        return;
+                        Pit pit = GameManager.Instance.pits[i];
+                        if (pit.isEnable)
+                        {
+                            breakable.inPit = true;
+                            OnDrop(new int2(0, 0));
+                            GameManager.Instance.pits[i].EatThings();
+                            return;
+                        }
                     }
                 }
                 
@@ -235,8 +243,13 @@ namespace DefaultNamespace
                 {
                     if (dropPosition.Equals(GameManager.Instance.pitPositions[i]))
                     {
-                        _player.stateMachine.ChangeState(typeof(InPitState));
-                        OnDrop(new int2(0,0));
+                        Pit pit = GameManager.Instance.pits[i];
+                        if (pit.isEnable)
+                        {
+                            _player.stateMachine.ChangeState(typeof(InPitState));
+                            OnDrop(new int2(0, 0));
+                            GameManager.Instance.pits[i].EatThings();
+                        }
                         return;
                     }
                 }
