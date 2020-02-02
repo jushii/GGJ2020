@@ -263,7 +263,7 @@ namespace DefaultNamespace
                 _hitResults[i].TryGetComponent(out Breakable breakable);
                 _hitResults[i].TryGetComponent(out Revive revive);
                 
-                if (breakable != null && breakable.Health > 0.0f)
+                if (breakable != null && breakable.Health > 0.0f && breakable.Health < 1.0f)
                 {
                     foundHit = true;
                     if (repairEffect != null)
@@ -271,7 +271,8 @@ namespace DefaultNamespace
                         int2 gridPosition = breakable.GridPosition;
                         Vector3 particlePosition = gridPosition.GetWorldPositionWithRandomOffset();
                         repairEffect.transform.position = particlePosition;
-                        repairEffect.gameObject.SetActive(true);
+                        repairEffect.Stop();
+                        repairEffect.Play(); 
                     }
 
                     breakable.IncreaseHealth(0.02f);
@@ -285,7 +286,8 @@ namespace DefaultNamespace
                         int2 gridPosition = revive.breakable.GridPosition;
                         Vector3 particlePosition = gridPosition.GetWorldPositionWithRandomOffset();
                         repairEffect.transform.position = particlePosition;
-                        repairEffect.gameObject.SetActive(true); 
+                        repairEffect.Stop();
+                        repairEffect.Play(); 
                     }
                     revive.ReviveParent();
                     break;
