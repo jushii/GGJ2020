@@ -26,6 +26,9 @@ public class Pit : MonoBehaviour
         spriteRenderer.sprite = openPit;
 
         GridPosition = transform.position.GetGridPosition();
+        
+        GameManager.Instance.level.UpdateOutsideStatus(GridPosition, false);
+
         GameManager.Instance.pitPositions.Add(GridPosition);
         GameManager.Instance.pits.Add(this);
     }

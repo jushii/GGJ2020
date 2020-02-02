@@ -134,6 +134,18 @@ namespace DefaultNamespace
                     moveSpeed = 5.0f;
                 }
             }
+            else
+            {
+                Tile tile = GameManager.Instance.level.GetTile(myGridPosition);
+                if (tile.IsOutside)
+                {
+                    _spriteRenderer.enabled = false;
+                }
+                else
+                {
+                    _spriteRenderer.enabled = true;
+                }
+            }
         }
 
         public void SetPlayerAnimation(PlayerAnimation playerAnimation)

@@ -13,6 +13,7 @@ namespace DefaultNamespace
             {
                 grid[i].GridPosition = new int2(GetPosition(i));
                 grid[i].IsBlocked = false;
+                grid[i].IsOutside = true;
             }
         }
         
@@ -31,6 +32,14 @@ namespace DefaultNamespace
         private int GetIndex(int2 position)
         {
             return (position.y * GameConfig.GridSizeX) + position.x;
+        }
+        
+        public void UpdateOutsideStatus(int2 gridPosition, bool isOutside)
+        {
+            int index = GetIndex(gridPosition);
+            Tile tile = GetTile(gridPosition);
+            tile.IsOutside = isOutside;
+            grid[index] = tile;
         }
         
         public void MakeUnwalkable(int2 gridPosition)
