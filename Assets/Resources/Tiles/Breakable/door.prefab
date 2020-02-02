@@ -327,7 +327,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Attacked_Door
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8942504062061512658, guid: 1dd154d4b2059d94a837fe04dbd41373, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1dd154d4b2059d94a837fe04dbd41373, type: 3}
 --- !u!4 &8054741977574066780 stripped
 Transform:

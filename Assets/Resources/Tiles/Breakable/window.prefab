@@ -92,6 +92,7 @@ MonoBehaviour:
     y: 0
   conditionUi: {fileID: 0}
   isWindow: 1
+  windowTiles: []
 --- !u!1 &3545502475014768864
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +327,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2105482457814901807, guid: fd02e13bdc682ca4d92d3107d39af582, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fd02e13bdc682ca4d92d3107d39af582, type: 3}
 --- !u!4 &6226891609398422627 stripped
 Transform:
