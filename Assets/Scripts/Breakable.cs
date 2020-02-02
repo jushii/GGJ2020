@@ -134,7 +134,7 @@ public class Breakable : MonoBehaviour
         //     ReviveThis();
         // }
 
-        if (_health >= 1.0f)
+        if (_health >= 0.98f)
         {
             conditionUi.Hide();
         }
