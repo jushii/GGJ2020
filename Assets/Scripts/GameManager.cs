@@ -32,6 +32,9 @@ namespace DefaultNamespace
 
         public int currentNpcCount;
         public bool hasGameEnded = false;
+
+        public bool isNpcCarryingTheGoal;
+        public bool isPlayerCarryingTheGoal;
         
         private void Awake()
         {

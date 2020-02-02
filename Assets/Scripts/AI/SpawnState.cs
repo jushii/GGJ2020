@@ -93,7 +93,18 @@ namespace DefaultNamespace
         private void FindPathToPrincess()
         {
             Level level = GameManager.Instance.level;
-            var pathfinderResult = Pathfinder.FindPath(level.grid, _player.myGridPosition, GameManager.Instance.goalObject.myPosition);
+            
+            int2 destination = new int2();
+            if (GameManager.Instance.isPlayerCarryingTheGoal)
+            {
+                destination = GameManager.Instance.goalObject.myPosition - new int2(0, 1);
+            }
+            else
+            {
+                destination = GameManager.Instance.goalObject.myPosition;
+            }
+            
+            var pathfinderResult = Pathfinder.FindPath(level.grid, _player.myGridPosition, destination);
 
             if (pathfinderResult.Path.Count > 0)
             {

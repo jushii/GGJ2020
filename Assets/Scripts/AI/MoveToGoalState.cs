@@ -44,6 +44,18 @@ namespace DefaultNamespace
 
             if (!_canMove) return;
 
+            // no need to grab the goal if another NPC is carrying it.
+            if (!GameManager.Instance.isNpcCarryingTheGoal)
+            {
+                Vector3 a = _player.myCollider.bounds.center;
+                Vector3 b = GameManager.Instance.isPlayerCarryingTheGoal ? GameManager.Instance.goalObject.transform.position + (Vector3.up * -0.65f) : GameManager.Instance.goalObject.transform.position;
+                var distanceToGoal = Vector3.Distance(a, b);
+                if (distanceToGoal < 1.0f)
+                {
+                    GrabTheGoal();
+                }
+            }
+
             if (_nextPathPositionIndex == -1 || _nextPathPositionIndex >= _pathfinderResult.Path.Count) return;
 
             Vector3 myWorldPos = _player.myGridPosition.GetWorldPosition();
@@ -59,7 +71,12 @@ namespace DefaultNamespace
                     _player.playerInput.Vertical = 0.0f;
                     _nextPathPositionIndex = -1;
                     _canMove = false;
-                    GrabTheGoal();
+                    
+                    // re-evaluate your life as an NPC since you failed to grab the goal
+                    if (GameManager.Instance.isNpcCarryingTheGoal)
+                    {
+                        StateMachine.ChangeState(typeof(SpawnState));
+                    }
                 }
                 return;
             }
@@ -73,7 +90,18 @@ namespace DefaultNamespace
         private void UpdatePathToGoal()
         {
             Level level = GameManager.Instance.level;
-            var pathfinderResult = Pathfinder.FindPath(level.grid, _player.myGridPosition, GameManager.Instance.goalObject.myPosition);
+
+            int2 destination = new int2();
+            if (GameManager.Instance.isPlayerCarryingTheGoal)
+            {
+                destination = GameManager.Instance.goalObject.myPosition - new int2(0, 1);
+            }
+            else
+            {
+                destination = GameManager.Instance.goalObject.myPosition;
+            }
+            
+            var pathfinderResult = Pathfinder.FindPath(level.grid, _player.myGridPosition, destination);
             // Debug.Log("path length to goal: " + pathfinderResult.Path.Count);
             _nextPathPositionIndex = 1;
             _pathfinderResult = pathfinderResult;
