@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
@@ -39,8 +40,12 @@ namespace DefaultNamespace
         public List<int2> pitPositions = new List<int2>();
         public List<Pit> pits = new List<Pit>();
 
+        public bool isGameOver;
+        
         private void Awake()
         {
+            isGameOver = false;
+            
             if (Instance == null)
             {
                 Instance = this;
@@ -75,6 +80,11 @@ namespace DefaultNamespace
             StartCoroutine(gameplayUi.StartStateRepair(GetFormattedTime(GameConfig.RepairStateTimeLimit), StartRepairState));
         }
 
+        public void GameOver()
+        {
+            isGameOver = true;
+        }
+
         public void StartRepairState()
         {
             stateRepairTimer = GameConfig.RepairStateTimeLimit;
@@ -91,6 +101,14 @@ namespace DefaultNamespace
         
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("SampleScene");
+                return;
+            }
+            
+            if (isGameOver) return;
+            
             for (int i = 0; i < stateMachines.Count; i++)
             {
                 stateMachines[i].Tick();
@@ -127,6 +145,8 @@ namespace DefaultNamespace
         
         private void FixedUpdate()
         {
+            if (isGameOver) return;
+
             for (int i = 0; i < stateMachines.Count; i++)
             {
                 stateMachines[i].FixedTick();
@@ -135,6 +155,8 @@ namespace DefaultNamespace
         
         private void LateUpdate()
         {
+            if (isGameOver) return;
+
             for (int i = 0; i < stateMachines.Count; i++)
             {
                 stateMachines[i].LateTick();

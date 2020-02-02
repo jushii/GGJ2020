@@ -48,6 +48,8 @@ namespace DefaultNamespace
         [SerializeField] AudioSource audioSource;
         [SerializeField] AudioClip repairSfx;
 
+        public bool forceStop;
+        
         private void Start()
         {
             animator = GetComponentInChildren<Animator>();
@@ -84,6 +86,8 @@ namespace DefaultNamespace
 
         private void Update()
         {
+            if (forceStop) return;
+            
             myGridPosition = myCollider.bounds.center.GetGridPosition();
 
             if (!isNpc)
@@ -218,6 +222,8 @@ namespace DefaultNamespace
         
         private void FixedUpdate()
         {
+            if (forceStop) return;
+
             if (_isEntity && _entity.isBeingCarried)
             {
                 return;

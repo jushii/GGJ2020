@@ -316,6 +316,21 @@ namespace DefaultNamespace
         
         private void Update()
         {
+            if (GameManager.Instance.isGameOver) return;
+            
+            if (!GameManager.Instance.isGameOver)
+            {
+                if (isGoal)
+                {
+                    Tile tile = GameManager.Instance.level.GetTile(_myCollider.bounds.center.GetGridPosition());
+                    if (tile.IsOutside)
+                    {
+                        GameManager.Instance.GameOver();
+                        return;
+                    }
+                }
+            }
+                
             int2 gridPosition = _myCollider.bounds.center.GetGridPosition();
             myPosition = gridPosition;
 
